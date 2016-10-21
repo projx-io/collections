@@ -2,61 +2,89 @@
 
 namespace ProjxIO\Collections;
 
-use ArrayAccess;
-
-interface Sequence extends Collection, ArrayAccess
+interface Sequence
 {
     /**
-     * @param integer $offset
-     * @return mixed
+     * @return array
      */
-    public function at($offset);
+    public function toArray();
 
     /**
      * @param mixed $value
      * @return Sequence
      */
-    public function prepend($value);
-
-    /**
-     * @param mixed $values
-     * @return Sequence
-     */
-    public function prependAll($values);
-
-    /**
-     * @param mixed $value
-     * @return Sequence
-     */
-    public function append($value);
-
-    /**
-     * @param mixed $values
-     * @return Sequence
-     */
-    public function appendAll($values);
+    public function offsetsOf($value);
 
     /**
      * @param $offsets
-     * @return Set
+     * @return Sequence
      */
-    public function select($offsets);
+    public function valuesAt($offsets);
 
     /**
-     * @param $value
-     * @return integer
+     * @param int $offset
+     * @return mixed
      */
-    public function firstOffsetOf($value);
+    public function valueAt($offset);
 
     /**
-     * @param $value
-     * @return integer
+     * @param mixed $value
      */
-    public function lastOffsetOf($value);
+    public function pushBack($value);
 
     /**
-     * @param $value
-     * @return Set
+     * @param mixed $values
      */
-    public function offsetsOf($value);
+    public function pushBackValues($values);
+
+    /**
+     * @return Sequence
+     */
+    public function unique();
+
+    /**
+     * @param callable|null $callback
+     * @return Sequence
+     */
+    public function sort(callable $callback = null);
+
+    /**
+     * @param mixed $value
+     * @return boolean
+     */
+    public function contains($value);
+
+    /**
+     * @param $values
+     * @return Sequence
+     */
+    public function intersect($values);
+
+    /**
+     * @param $offsets
+     */
+    public function removeOffsets($offsets);
+
+    /**
+     * @return Sequence
+     */
+    public function withOffsets();
+
+    /**
+     * @param $values
+     * @return SequentialMultiMap
+     */
+    public function combine($values);
+
+    /**
+     * @param callable $callback
+     * @return Sequence
+     */
+    public function map(callable $callback);
+
+    /**
+     * @param callable $callback
+     * @return Sequence
+     */
+    public function filter(callable $callback);
 }
