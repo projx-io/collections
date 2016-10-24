@@ -5,9 +5,10 @@ namespace ProjxIO\Collections;
 interface Sequence
 {
     /**
+     * @param int $deep
      * @return array
      */
-    public function toArray();
+    public function toArray($deep = 0);
 
     /**
      * @param mixed $value
@@ -75,6 +76,12 @@ interface Sequence
      * @return SequentialMultiMap
      */
     public function combine($values);
+
+    /**
+     * @param callable $callback
+     * @return Sequence
+     */
+    public function each(callable $callback);
 
     /**
      * @param callable $callback

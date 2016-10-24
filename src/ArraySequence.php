@@ -43,9 +43,23 @@ class ArraySequence implements Sequence, IteratorAggregate, Countable
     /**
      * @inheritDoc
      */
-    public function toArray()
+    public function toArray($deep = 0)
     {
-        return $this->values;
+        if (!$deep) {
+            return $this->values;
+        }
+
+        if (is_int($deep)) {
+            $deep--;
+        }
+
+        return $this->map(function ($value) use ($deep) {
+            if ($value instanceof Sequence) {
+                return $value->toArray($deep);
+            }
+
+            return (array)$deep;
+        })->toArray(false);
     }
 
     /**
@@ -191,6 +205,12 @@ class ArraySequence implements Sequence, IteratorAggregate, Countable
         }
 
         return new SequentialMultiMap(new ArraySequence($this), new ArraySequence($values));
+    }
+
+    public function each(callable $callback)
+    {
+        array_map($callback, $this->values);
+        return $this;
     }
 
     /**

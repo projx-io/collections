@@ -571,6 +571,21 @@ class SequentialMultiMapTest extends TestCase
         $this->assertEquals(['A', 'AA', 'A', 'B'], $actual->values()->toArray());
     }
 
+    public function testGroup()
+    {
+        $c = new SequentialMultiMap();
+        $c->pushBackEntry('a', 'A');
+        $c->pushBackEntry('b', 'B');
+        $c->pushBackEntry('a', 'AA');
+        $c->pushBackEntry('b', 'BB');
+        $c->pushBackEntry('c', 'A');
+        $c->pushBackEntry('c', 'B');
+
+        $actual = $c->group(function (Entry $entry) {
+            return $entry->key;
+        });
+    }
+
     public function testObjectsAsKeys()
     {
         $_1__ = (object)[];

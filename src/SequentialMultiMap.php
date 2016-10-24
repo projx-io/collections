@@ -17,6 +17,15 @@ class SequentialMultiMap implements Countable, IteratorAggregate
         return $collection;
     }
 
+    public static function fill($keys, $value = null)
+    {
+        $collection = new SequentialMultiMap();
+        foreach ($keys as $key) {
+            $collection->pushBackEntry($key, $value);
+        }
+        return $collection;
+    }
+
     /**
      * @var Sequence
      */
@@ -338,6 +347,9 @@ class SequentialMultiMap implements Countable, IteratorAggregate
         return $entries;
     }
 
+    /**
+     * @return SequentialMultiMap
+     */
     public function withKeys()
     {
         $entries = new SequentialMultiMap();
@@ -355,8 +367,8 @@ class SequentialMultiMap implements Countable, IteratorAggregate
     public function mapToValues(callable $callback = null)
     {
         return $this->map(function (Entry $entry) use ($callback) {
-            $from = new Pair($entry->key, $entry->value, $entry->offset);
-            $to = ($callback !== null ? call_user_func($callback, $from) : null) ?: $from;
+            $to = new Pair($entry->key, $entry->value, $entry->offset);
+            $to->value = ($callback !== null ? call_user_func($callback, $to) : null) ?: $to->value;
             $entry->value = $to->value;
         });
     }
@@ -368,8 +380,8 @@ class SequentialMultiMap implements Countable, IteratorAggregate
     public function mapToKeys(callable $callback = null)
     {
         return $this->map(function (Entry $entry) use ($callback) {
-            $from = new Pair($entry->key, $entry->value, $entry->offset);
-            $to = ($callback !== null ? call_user_func($callback, $from) : null) ?: $from;
+            $to = new Pair($entry->key, $entry->value, $entry->offset);
+            $to->key = ($callback !== null ? call_user_func($callback, $to) : null) ?: $to->key;
             $entry->key = $to->key;
         });
     }
@@ -456,5 +468,20 @@ class SequentialMultiMap implements Countable, IteratorAggregate
         );
     }
 
-    
+    /**
+     * @param callable $callback
+     * @return SequentialMultiMap
+     */
+    public function group(callable $callback)
+    {
+    }
 }
+
+// A mom can have many kids // to-many
+// A kid can have one mom // to-one
+// A parent can have many kids // to-many
+// A kid can have many parents // to-many
+
+// mom:kids
+//      mom --(many)--> kid
+//      mom --(one)-- kid
