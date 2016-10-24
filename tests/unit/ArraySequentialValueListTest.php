@@ -6,7 +6,7 @@ class ArraySequentialValueListTest extends TestCase
 {
     public function dataProvider()
     {
-        $values = $this->combinations($this->generateArrayOfObjects(self::$size));
+        $values = $this->combinations($this->generateArrayOfObjects(self::SIZE));
 
         return array_map(function ($values) {
             return [$values];

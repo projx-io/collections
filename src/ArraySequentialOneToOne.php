@@ -34,7 +34,7 @@ class ArraySequentialOneToOne implements SequentialOneToOne
      */
     public function itemOfValue($value)
     {
-        return $this->itemAtOffset($this->offsetOfKey($value));
+        return $this->itemAtOffset($this->offsetOfValue($value));
     }
 
     /**
@@ -72,7 +72,7 @@ class ArraySequentialOneToOne implements SequentialOneToOne
      */
     public function itemOfKey($key)
     {
-        return $this->itemAtOffset($this->offsetOfValue($key));
+        return $this->itemAtOffset($this->offsetOfKey($key));
     }
 
     /**

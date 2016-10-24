@@ -6,8 +6,8 @@ class ArraySequentialOneToOneTest extends TestCase
 {
     public function dataProvider()
     {
-        $keys = $this->combinations($this->generateArrayOfObjects(self::$size));
-        $values = $this->combinations($this->generateArrayOfObjects(self::$size));
+        $keys = $this->combinations($this->generateArrayOfObjects(self::SIZE));
+        $values = $this->combinations($this->generateArrayOfObjects(self::SIZE));
 
         return array_map(function ($keys, $values) {
             return [$keys, $values];

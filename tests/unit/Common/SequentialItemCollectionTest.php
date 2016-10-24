@@ -1,42 +1,11 @@
 <?php
 
-namespace ProjxIO\Collections;
+namespace ProjxIO\Collections\Common;
 
-use ProjxIO\Collections\Common\SequentialEntry;
-use ProjxIO\Collections\Common\SequentialItemCollection;
+use ProjxIO\Collections\TestCase;
 
 class SequentialItemCollectionTest extends TestCase
 {
-    public function dataProviderOneToOne()
-    {
-        $keys = $this->generateArrayOfObjects(self::$size);
-        $values = $this->generateArrayOfObjects(self::$size);
-
-        $collections = [
-            new ArraySequentialOneToOne($keys, $values),
-            new ArraySequentialOneToMany($keys, $values),
-            new ArraySequentialManyToOne($keys, $values),
-            new ArraySequentialManyToMany($keys, $values),
-        ];
-
-        return $this->generateCollectionCasesOneToOne($collections, $values, $keys);
-    }
-
-    public function dataProviderManyToMany()
-    {
-        $keys = $this->generateArrayOfObjects(self::$size);
-        $values = $this->generateArrayOfObjects(self::$size);
-
-        $collections = [
-            new ArraySequentialOneToOne($keys, $values),
-            new ArraySequentialOneToMany($keys, $values),
-            new ArraySequentialManyToOne($keys, $values),
-            new ArraySequentialManyToMany($keys, $values),
-        ];
-
-        return $this->generateCollectionCasesManyToMany($collections, $values, $keys);
-    }
-
     /**
      * @dataProvider dataProviderOneToOne
      * @param SequentialItemCollection $c

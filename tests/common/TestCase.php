@@ -17,7 +17,58 @@ class TestCase extends PHPUnit_Framework_TestCase
      *
      * @var int
      */
-    public static $size = 6;
+    const SIZE = 6;
+
+    public function dataProviderOneToOne()
+    {
+        return $this->generateCollectionCasesOneToOneOfType();
+    }
+
+    public function dataProviderManyToMany()
+    {
+        return $this->generateCollectionCasesManyToManyOfType();
+    }
+
+    public function selectCollections($type, $collections)
+    {
+        return array_filter($collections, function ($collection) use ($type) {
+            return $collection instanceof $type;
+        });
+    }
+
+    public function generateCollectionCasesOneToOneOfType($type = null, $size = self::SIZE)
+    {
+        $type = $type ? $type : str_replace('Test', '', get_class($this));
+
+        $keys = $this->generateArrayOfObjects($size);
+        $values = $this->generateArrayOfObjects($size);
+        $collections = $this->generateCollections($keys, $values, $type);
+
+        return $this->generateCollectionCasesOneToOne($collections, $values, $keys);
+    }
+
+    public function generateCollectionCasesManyToManyOfType($type = null, $size = self::SIZE)
+    {
+        $type = $type ? $type : str_replace('Test', '', get_class($this));
+
+        $keys = $this->generateArrayOfObjects($size);
+        $values = $this->generateArrayOfObjects($size);
+        $collections = $this->generateCollections($keys, $values, $type);
+
+        return $this->generateCollectionCasesManyToMany($collections, $values, $keys);
+    }
+
+    public function generateCollections($keys, $values, $type)
+    {
+        return $this->selectCollections($type, [
+            new ArraySequentialValueSet($values),
+            new ArraySequentialValueList($values),
+            new ArraySequentialOneToOne($keys, $values),
+            new ArraySequentialOneToMany($keys, $values),
+            new ArraySequentialManyToOne($keys, $values),
+            new ArraySequentialManyToMany($keys, $values),
+        ]);
+    }
 
     public function generateCollectionCasesOneToOne($collections, $values = [], $keys = [])
     {
