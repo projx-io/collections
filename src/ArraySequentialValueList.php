@@ -25,13 +25,7 @@ class ArraySequentialValueList implements SequentialValueList
      */
     public function offsetsOfValues($values)
     {
-        $offsets = [];
-
-        foreach ($values as $offset => $value) {
-            $offsets = array_merge($offsets, $this->offsetsOfValue($value));
-        }
-
-        return $offsets;
+        return count($values) ? call_user_func_array('array_merge', array_map([$this, 'offsetsOfValue'], $values)) : [];
     }
 
     /**
@@ -63,12 +57,6 @@ class ArraySequentialValueList implements SequentialValueList
      */
     public function valuesAtOffsets($offsets)
     {
-        $values = [];
-
-        foreach ($offsets as $offset) {
-            $values[] = $this->valueAtOffset($offset);
-        }
-
-        return $values;
+        return array_map([$this, 'valueAtOffset'], $offsets);
     }
 }

@@ -51,13 +51,7 @@ class ArraySequentialManyToMany implements SequentialManyToMany
      */
     public function itemsAtOffsets($offsets)
     {
-        $items = [];
-
-        foreach ($offsets as $offset) {
-            $items[] = $this->itemAtOffset($offset);
-        }
-
-        return $items;
+        return array_map([$this, 'itemAtOffset'], $offsets);
     }
 
     /**
@@ -97,13 +91,7 @@ class ArraySequentialManyToMany implements SequentialManyToMany
      */
     public function offsetsOfItems($items)
     {
-        $offsets = [];
-
-        foreach ($items as $item) {
-            $offsets = array_merge($offsets, $this->offsetsOfItem($item));
-        }
-
-        return $offsets;
+        return count($items) ? call_user_func_array('array_merge', array_map([$this, 'offsetsOfItem'], $items)) : [];
     }
 
     /**

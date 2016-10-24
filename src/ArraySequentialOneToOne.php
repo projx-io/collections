@@ -58,13 +58,7 @@ class ArraySequentialOneToOne implements SequentialOneToOne
      */
     public function itemsAtOffsets($offsets)
     {
-        $items = [];
-
-        foreach ($offsets as $offset) {
-            $items[] = $this->itemAtOffset($offset);
-        }
-
-        return $items;
+        return array_map([$this, 'itemAtOffset'], $offsets);
     }
 
     /**
@@ -96,13 +90,7 @@ class ArraySequentialOneToOne implements SequentialOneToOne
      */
     public function keysAtOffsets($offsets)
     {
-        $keys = [];
-
-        foreach ($offsets as $offset) {
-            $keys[] = $this->keyAtOffset($offset);
-        }
-
-        return $keys;
+        return array_map([$this, 'keyAtOffset'], $offsets);
     }
 
     /**
@@ -127,7 +115,7 @@ class ArraySequentialOneToOne implements SequentialOneToOne
     public function offsetOfItem(Entry $item)
     {
         $offset = $this->offsetOfKey($item->key());
-        return $this->valueAtOffset($offset) === $item->value() ? $offset : null;
+        return $this->valueAtOffset($offset) === $item->value() ? $offset : false;
     }
 
     /**
@@ -135,13 +123,7 @@ class ArraySequentialOneToOne implements SequentialOneToOne
      */
     public function offsetsOfItems($items)
     {
-        $offsets = [];
-
-        foreach ($items as $item) {
-            $offsets[] = $this->offsetOfItem($item);
-        }
-
-        return $offsets;
+        return array_map([$this, 'offsetOfItem'], $items);
     }
 
     /**
@@ -157,13 +139,7 @@ class ArraySequentialOneToOne implements SequentialOneToOne
      */
     public function offsetsOfKeys($keys)
     {
-        $offsets = [];
-
-        foreach ($keys as $key) {
-            $offsets[] = $this->offsetOfKey($key);
-        }
-
-        return $offsets;
+        return array_map([$this, 'offsetOfKey'], $keys);
     }
 
     /**
@@ -171,13 +147,7 @@ class ArraySequentialOneToOne implements SequentialOneToOne
      */
     public function offsetsOfValues($values)
     {
-        $offsets = [];
-
-        foreach ($values as $value) {
-            $offsets[] = $this->offsetOfValue($value);
-        }
-
-        return $offsets;
+        return array_map([$this, 'offsetOfValue'], $values);
     }
 
     /**
@@ -217,12 +187,6 @@ class ArraySequentialOneToOne implements SequentialOneToOne
      */
     public function valuesAtOffsets($offsets)
     {
-        $values = [];
-
-        foreach ($offsets as $offset) {
-            $values[] = $this->valueAtOffset($offset);
-        }
-
-        return $values;
+        return array_map([$this, 'valueAtOffset'], $offsets);
     }
 }

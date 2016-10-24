@@ -60,13 +60,7 @@ class ArraySequentialOneToMany implements SequentialOneToMany
      */
     public function itemsAtOffsets($offsets)
     {
-        $items = [];
-
-        foreach ($offsets as $offset) {
-            $items[] = $this->itemAtOffset($offset);
-        }
-
-        return $items;
+        return array_map([$this, 'itemAtOffset'], $offsets);
     }
 
     /**
@@ -115,7 +109,7 @@ class ArraySequentialOneToMany implements SequentialOneToMany
     public function offsetOfItem(Entry $item)
     {
         $offset = $this->offsetOfValue($item->value());
-        return $this->keyAtOffset($offset) === $item->key() ? $offset : null;
+        return $this->keyAtOffset($offset) === $item->key() ? $offset : false;
     }
 
     /**
@@ -123,16 +117,7 @@ class ArraySequentialOneToMany implements SequentialOneToMany
      */
     public function offsetsOfItems($items)
     {
-        $offsets = [];
-
-        foreach ($items as $item) {
-            $offset = $this->offsetOfItem($item);
-            if ($offset !== false) {
-                $offsets[] = $offset;
-            }
-        }
-
-        return $offsets;
+        return array_map([$this, 'offsetOfItem'], $items);
     }
 
     /**
