@@ -180,7 +180,7 @@ class ArraySequentialManyToOne implements SequentialManyToOne
      */
     public function itemsOfValue($value)
     {
-        return $this->itemsAtOffsets($this->offsetsOfKeys([$value]));
+        return $this->itemsAtOffsets($this->offsetsOfValue($value));
     }
 
     /**

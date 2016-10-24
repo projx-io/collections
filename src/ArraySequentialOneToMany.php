@@ -27,7 +27,7 @@ class ArraySequentialOneToMany implements SequentialOneToMany
      */
     public function __construct($keys = [], $values = [])
     {
-        $this->keys = new ArraySequentialValueSet($keys);
+        $this->keys = new ArraySequentialValueList($keys);
         $this->values = new ArraySequentialValueSet($values);
     }
 
@@ -188,7 +188,7 @@ class ArraySequentialOneToMany implements SequentialOneToMany
      */
     public function itemsOfKey($key)
     {
-        return $this->itemsAtOffsets($this->offsetsOfValues([$key]));
+        return $this->itemsAtOffsets($this->offsetsOfKey($key));
     }
 
     /**

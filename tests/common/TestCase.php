@@ -29,6 +29,34 @@ class TestCase extends PHPUnit_Framework_TestCase
         return $this->generateCollectionCasesManyToManyOfType();
     }
 
+    public function dataProviderOneToMany()
+    {
+        $data = $this->dataProviderManyToMany();
+        $cases = [];
+
+        foreach ($data as $set) {
+            foreach ($set[3] as $offset => $key) {
+                $cases[] = [$set[0], [$set[1][$offset]], [$set[2][$offset]], $key, [$set[4][$offset]]];
+            }
+        }
+
+        return $cases;
+    }
+
+    public function dataProviderManyToOne()
+    {
+        $data = $this->dataProviderManyToMany();
+        $cases = [];
+
+        foreach ($data as $set) {
+            foreach ($set[2] as $offset => $value) {
+                $cases[] = [$set[0], [$set[1][$offset]], $value, [$set[3][$offset]], [$set[4][$offset]]];
+            }
+        }
+
+        return $cases;
+    }
+
     public function selectCollections($type, $collections)
     {
         return array_filter($collections, function ($collection) use ($type) {
@@ -53,6 +81,18 @@ class TestCase extends PHPUnit_Framework_TestCase
 
         $keys = $this->generateArrayOfObjects($size);
         $values = $this->generateArrayOfObjects($size);
+        $collections = $this->generateCollections($keys, $values, $type);
+
+        return $this->generateCollectionCasesManyToMany($collections, $values, $keys);
+    }
+
+    public function generateCollectionCasesOneToManyOfType($type = null, $size = self::SIZE)
+    {
+        $type = $type ? $type : str_replace('Test', '', get_class($this));
+
+        $keys = $this->generateArrayOfObjects($size);
+        $keys = array_merge($keys, $keys);
+        $values = $this->generateArrayOfObjects($size * 2);
         $collections = $this->generateCollections($keys, $values, $type);
 
         return $this->generateCollectionCasesManyToMany($collections, $values, $keys);
@@ -124,7 +164,7 @@ class TestCase extends PHPUnit_Framework_TestCase
         }, $keys, $values, $offsets ? $offsets : range(0, count($keys) - 1));
     }
 
-    public function generateArrayOfObjects($n)
+    public function generateArrayOfObjects($n = self::SIZE)
     {
         return array_map(function ($i) {
             return (object)[
@@ -232,9 +272,9 @@ class TestCase extends PHPUnit_Framework_TestCase
      */
     public function assertItems($expects, $actuals)
     {
-        foreach ($expects as $i => $entry) {
+        foreach ($expects as $i => $expect) {
             $actual = $actuals[$i];
-            $this->assertItem($entry, $actual);
+            $this->assertItem($expect, $actual);
         }
     }
 

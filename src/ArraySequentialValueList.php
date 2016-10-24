@@ -2,11 +2,9 @@
 
 namespace ProjxIO\Collections;
 
-use ArrayIterator;
-use IteratorAggregate;
 use ProjxIO\Collections\Common\SequentialValueList;
 
-class ArraySequentialValueList implements SequentialValueList, IteratorAggregate
+class ArraySequentialValueList implements SequentialValueList
 {
     /**
      * @var array
@@ -20,14 +18,6 @@ class ArraySequentialValueList implements SequentialValueList, IteratorAggregate
     public function __construct($values = [])
     {
         $this->values = $values;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getIterator()
-    {
-        return new ArrayIterator($this->values);
     }
 
     /**

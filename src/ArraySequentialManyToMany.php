@@ -151,7 +151,7 @@ class ArraySequentialManyToMany implements SequentialManyToMany
      */
     public function itemsOfValue($value)
     {
-        return $this->itemsAtOffsets($this->offsetsOfKeys([$value]));
+        return $this->itemsAtOffsets($this->offsetsOfValue($value));
     }
 
     /**
