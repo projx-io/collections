@@ -4,3 +4,4 @@ cache.properties
 out
 vendor
 composer.lock
+build/logs
