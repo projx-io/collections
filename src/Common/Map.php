@@ -5,6 +5,13 @@ namespace ProjxIO\Collections\Common;
 interface Map
 {
     /**
+     * @param mixed $key
+     * @param mixed $value
+     * @return bool
+     */
+    public function containsEntry($key, $value);
+
+    /**
      * @param mixed[] $keys
      * @return mixed[]
      */

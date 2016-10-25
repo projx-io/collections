@@ -3,6 +3,7 @@
 namespace ProjxIO\Collections;
 
 use ProjxIO\Collections\Common\Entry;
+use ProjxIO\Collections\Common\Item;
 use ProjxIO\Collections\Common\SequentialItem;
 use ProjxIO\Collections\Common\SequentialOneToOne;
 
@@ -188,5 +189,13 @@ class ArraySequentialOneToOne implements SequentialOneToOne
     public function valuesAtOffsets($offsets)
     {
         return array_map([$this, 'valueAtOffset'], $offsets);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function containsEntry($key, $value)
+    {
+        return $this->offsetOfItem(new Item($key, $value)) !== false;
     }
 }

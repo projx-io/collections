@@ -6,7 +6,6 @@ use ProjxIO\Collections\Common\Entry;
 use ProjxIO\Collections\Common\Item;
 use ProjxIO\Collections\Common\MutableSequentialManyToMany;
 use ProjxIO\Collections\Common\SequentialItem;
-use ProjxIO\Collections\Common\SequentialManyToMany;
 use ProjxIO\Collections\Common\SequentialValueList;
 
 class ArraySequentialManyToMany implements MutableSequentialManyToMany
@@ -206,10 +205,19 @@ class ArraySequentialManyToMany implements MutableSequentialManyToMany
      */
     public function remove($key, $value)
     {
-        while ($offsets = $this->offsetsOfItem(new Item($key, $value))) {
+        $item = new Item($key, $value);
+        while ($offsets = $this->offsetsOfItem($item)) {
             $offset = array_shift($offsets);
             $this->keys->removeAt($offset);
             $this->values->removeAt($offset);
         }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function containsEntry($key, $value)
+    {
+        return !empty($this->offsetsOfItem(new Item($key, $value)));
     }
 }

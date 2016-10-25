@@ -7,6 +7,19 @@ use ProjxIO\Collections\TestCase;
 class MapTest extends TestCase
 {
     /**
+     * @dataProvider dataProviderOneToOne
+     * @param Map $c
+     * @param int $offset
+     * @param mixed $value
+     * @param mixed $key
+     * @param SequentialEntry $item
+     */
+    public function testContainsEntry(Map $c, $offset, $value, $key, $item)
+    {
+        $this->assertTrue($c->containsEntry($key, $value));
+    }
+
+    /**
      * @dataProvider dataProviderManyToMany
      * @param Map $c
      * @param int[] $offsets

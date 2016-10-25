@@ -3,6 +3,7 @@
 namespace ProjxIO\Collections;
 
 use ProjxIO\Collections\Common\Entry;
+use ProjxIO\Collections\Common\Item;
 use ProjxIO\Collections\Common\SequentialItem;
 use ProjxIO\Collections\Common\SequentialOneToMany;
 use ProjxIO\Collections\Common\SequentialValueList;
@@ -190,5 +191,13 @@ class ArraySequentialOneToMany implements SequentialOneToMany
     public function offsetsOfKey($key)
     {
         return $this->keys->offsetsOfValue($key);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function containsEntry($key, $value)
+    {
+        return $this->offsetOfItem(new Item($key, $value)) !== false;
     }
 }

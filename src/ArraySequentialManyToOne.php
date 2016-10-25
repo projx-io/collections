@@ -3,6 +3,7 @@
 namespace ProjxIO\Collections;
 
 use ProjxIO\Collections\Common\Entry;
+use ProjxIO\Collections\Common\Item;
 use ProjxIO\Collections\Common\SequentialItem;
 use ProjxIO\Collections\Common\SequentialManyToOne;
 use ProjxIO\Collections\Common\SequentialValueList;
@@ -190,5 +191,13 @@ class ArraySequentialManyToOne implements SequentialManyToOne
     public function offsetsOfValue($value)
     {
         return $this->values->offsetsOfValue($value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function containsEntry($key, $value)
+    {
+        return $this->offsetOfItem(new Item($key, $value)) !== false;
     }
 }
