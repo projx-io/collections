@@ -3,11 +3,13 @@
 namespace ProjxIO\Collections;
 
 use ProjxIO\Collections\Common\Entry;
+use ProjxIO\Collections\Common\Item;
+use ProjxIO\Collections\Common\MutableSequentialManyToMany;
 use ProjxIO\Collections\Common\SequentialItem;
 use ProjxIO\Collections\Common\SequentialManyToMany;
 use ProjxIO\Collections\Common\SequentialValueList;
 
-class ArraySequentialManyToMany implements SequentialManyToMany
+class ArraySequentialManyToMany implements MutableSequentialManyToMany
 {
     /**
      * @var SequentialValueList
@@ -188,5 +190,26 @@ class ArraySequentialManyToMany implements SequentialManyToMany
     public function offsetsOfKey($key)
     {
         return $this->keys->offsetsOfValue($key);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function put($key, $value)
+    {
+        $this->keys->pushValueBack($key);
+        $this->values->pushValueBack($value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function remove($key, $value)
+    {
+        while ($offsets = $this->offsetsOfItem(new Item($key, $value))) {
+            $offset = array_shift($offsets);
+            $this->keys->removeAt($offset);
+            $this->values->removeAt($offset);
+        }
     }
 }

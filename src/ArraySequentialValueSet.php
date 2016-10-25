@@ -2,9 +2,10 @@
 
 namespace ProjxIO\Collections;
 
+use ProjxIO\Collections\Common\MutableSequentialValueCollection;
 use ProjxIO\Collections\Common\SequentialValueSet;
 
-class ArraySequentialValueSet implements SequentialValueSet
+class ArraySequentialValueSet implements SequentialValueSet, MutableSequentialValueCollection
 {
     /**
      * @var array
@@ -60,5 +61,44 @@ class ArraySequentialValueSet implements SequentialValueSet
     public function valuesAtOffsets($offsets)
     {
         return array_map([$this, 'valueAtOffset'], $offsets);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function insertValue($offset, $value)
+    {
+        $this->removeAt($this->offsetOfValue($value));
+        array_splice($this->values, $offset, 0, [$value]);
+        $this->values = array_values($this->values);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function pushValueFront($value)
+    {
+        $this->removeAt($this->offsetOfValue($value));
+        array_unshift($this->values, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function pushValueBack($value)
+    {
+        $this->removeAt($this->offsetOfValue($value));
+        array_push($this->values, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function removeAt($offset)
+    {
+        if (array_key_exists($offset, $this->values)) {
+            array_splice($this->values, $offset, 1);
+            $this->values = array_values($this->values);
+        }
     }
 }
