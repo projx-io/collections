@@ -208,4 +208,12 @@ class ArraySequentialOneToMany implements SequentialOneToMany
     {
         return $this->values->containsValue($value);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function containsKey($key)
+    {
+        return $this->keys->containsValue($key);
+    }
 }

@@ -206,4 +206,12 @@ class ArraySequentialOneToOne implements SequentialOneToOne
     {
         return array_search($value, $this->values, true) !== false;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function containsKey($key)
+    {
+        return array_search($key, $this->keys, true) !== false;
+    }
 }

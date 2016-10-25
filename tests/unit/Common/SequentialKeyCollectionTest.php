@@ -13,6 +13,30 @@ class SequentialKeyCollectionTest extends TestCase
      * @param mixed $value
      * @param mixed $key
      */
+    public function testContainsKey(SequentialKeyCollection $c, $offset, $value, $key)
+    {
+        $this->assertTrue($c->containsKey($key));
+    }
+
+    /**
+     * @dataProvider dataProviderOneToOne
+     * @param SequentialKeyCollection $c
+     * @param int $offset
+     * @param mixed $value
+     * @param mixed $key
+     */
+    public function testNotContainsKey(SequentialKeyCollection $c, $offset, $value, $key)
+    {
+        $this->assertFalse($c->containsKey('no value here'));
+    }
+
+    /**
+     * @dataProvider dataProviderOneToOne
+     * @param SequentialKeyCollection $c
+     * @param int $offset
+     * @param mixed $value
+     * @param mixed $key
+     */
     public function testKeyAtOffset(SequentialKeyCollection $c, $offset, $value, $key)
     {
         $this->assertEquals($key, $c->keyAtOffset($offset));
