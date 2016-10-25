@@ -96,4 +96,12 @@ class ArraySequentialValueList implements SequentialValueList, MutableSequential
             $this->values = array_values($this->values);
         }
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function containsValue($value)
+    {
+        return array_search($value, $this->values, true) !== false;
+    }
 }

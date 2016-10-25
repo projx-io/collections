@@ -25,6 +25,34 @@ class MutableSequentialValueCollectionTest extends TestCase
     }
 
     /**
+     * @dataProvider dataProviderManyToMany
+     * @param MutableSequentialValueCollection $c
+     * @param int[] $offsets
+     * @param mixed[] $values
+     * @param mixed[] $keys
+     * @param SequentialEntry[] $items
+     */
+    public function testPushValueFront(MutableSequentialValueCollection $c, $offsets, $values, $keys, $items)
+    {
+        $c->pushValueFront('a');
+        $this->assertContains('a', $c->valueAtOffset(0));
+    }
+
+    /**
+     * @dataProvider dataProviderManyToMany
+     * @param MutableSequentialValueCollection $c
+     * @param int[] $offsets
+     * @param mixed[] $values
+     * @param mixed[] $keys
+     * @param SequentialEntry[] $items
+     */
+    public function testPushValueBack(MutableSequentialValueCollection $c, $offsets, $values, $keys, $items)
+    {
+        $c->pushValueBack('a');
+        $this->assertTrue($c->containsValue('a'));
+    }
+
+    /**
      * @depends testInsertValue
      * @dataProvider dataProviderManyToMany
      * @param MutableSequentialValueCollection $c

@@ -200,4 +200,12 @@ class ArraySequentialOneToMany implements SequentialOneToMany
     {
         return $this->offsetOfItem(new Item($key, $value)) !== false;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function containsValue($value)
+    {
+        return $this->values->containsValue($value);
+    }
 }

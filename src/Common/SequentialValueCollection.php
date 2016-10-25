@@ -5,6 +5,12 @@ namespace ProjxIO\Collections\Common;
 interface SequentialValueCollection
 {
     /**
+     * @param mixed $value
+     * @return bool
+     */
+    public function containsValue($value);
+
+    /**
      * @param mixed[] $values
      * @return int[]
      */

@@ -220,4 +220,12 @@ class ArraySequentialManyToMany implements MutableSequentialManyToMany
     {
         return !empty($this->offsetsOfItem(new Item($key, $value)));
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function containsValue($value)
+    {
+        return $this->values->containsValue($value);
+    }
 }

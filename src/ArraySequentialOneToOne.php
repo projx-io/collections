@@ -198,4 +198,12 @@ class ArraySequentialOneToOne implements SequentialOneToOne
     {
         return $this->offsetOfItem(new Item($key, $value)) !== false;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function containsValue($value)
+    {
+        return array_search($value, $this->values, true) !== false;
+    }
 }
