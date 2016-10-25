@@ -25,7 +25,7 @@ class MutableSequentialValueCollectionTest extends TestCase
     }
 
     /**
-     * @depends testInsert
+     * @depends testInsertValue
      * @dataProvider dataProviderManyToMany
      * @param MutableSequentialValueCollection $c
      * @param int[] $offsets

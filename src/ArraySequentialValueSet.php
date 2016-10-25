@@ -96,7 +96,7 @@ class ArraySequentialValueSet implements SequentialValueSet, MutableSequentialVa
      */
     public function removeAt($offset)
     {
-        if (array_key_exists($offset, $this->values)) {
+        if ($offset !== false && array_key_exists($offset, $this->values)) {
             array_splice($this->values, $offset, 1);
             $this->values = array_values($this->values);
         }

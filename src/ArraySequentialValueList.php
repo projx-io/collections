@@ -91,7 +91,9 @@ class ArraySequentialValueList implements SequentialValueList, MutableSequential
      */
     public function removeAt($offset)
     {
-        array_splice($this->values, $offset, 1);
-        $this->values = array_values($this->values);
+        if ($offset !== false && array_key_exists($offset, $this->values)) {
+            array_splice($this->values, $offset, 1);
+            $this->values = array_values($this->values);
+        }
     }
 }
