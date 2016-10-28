@@ -18,7 +18,7 @@ class FromManyTest extends TestCase
             new EntryItem('B', 'Z'),
         ]);
 
-//        $this->assertEquals([0, 3], $collection->offsetsOfValue('X'));
+        $this->assertEquals([0, 3], $collection->offsetsOfValue('X'));
     }
 
     public function testOffsetsOfValues()
@@ -32,7 +32,7 @@ class FromManyTest extends TestCase
             new EntryItem('B', 'Z'),
         ]);
 
-//        $this->assertEquals([[0, 3], [2, 5]], $collection->offsetsOfValue(['X', 'Z']));
+        $this->assertEquals([[0, 3], [2, 5]], $collection->offsetsOfValues(['X', 'Z']));
     }
 
     public function testKeysOfValue()
@@ -46,7 +46,7 @@ class FromManyTest extends TestCase
             new EntryItem('B', 'Z'),
         ]);
 
-//        $this->assertEquals(['A', 'D'], $collection->offsetsOfValue('X'));
+        $this->assertEquals(['A', 'D'], $collection->keysOfValue('X'));
     }
 
     public function testKeysOfValues()
@@ -60,7 +60,7 @@ class FromManyTest extends TestCase
             new EntryItem('B', 'Z'),
         ]);
 
-//        $this->assertEquals([['A', 'D'], ['C', 'B']], $collection->offsetsOfValue(['X', 'Z']));
+        $this->assertEquals([['A', 'D'], ['C', 'B']], $collection->keysOfValues(['X', 'Z']));
     }
 
     public function testItemsOfValue()
@@ -78,7 +78,8 @@ class FromManyTest extends TestCase
             new EntryItem('A', 'X'),
             new EntryItem('D', 'X'),
         ];
-//        $this->assertItems($items, $collection->itemsOfValue('X'));
+
+        $this->assertItems($items, $collection->itemsOfValue('X'));
     }
 
     public function testItemsOfValues()
@@ -97,7 +98,12 @@ class FromManyTest extends TestCase
                 new EntryItem('A', 'X'),
                 new EntryItem('D', 'X'),
             ],
+            [
+                new EntryItem('C', 'Z'),
+                new EntryItem('B', 'Z'),
+            ],
         ];
-//        $this->assertItemsList($items, $collection->itemsOfValues(['X', 'Z']));
+
+        $this->assertItemsList($items, $collection->itemsOfValues(['X', 'Z']));
     }
 }

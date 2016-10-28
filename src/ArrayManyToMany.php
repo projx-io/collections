@@ -202,7 +202,9 @@ class ArrayManyToMany implements FromManyToMany
      */
     public function offsetsOfValue($value)
     {
-
+        return array_map(function ($item) {
+            return array_search($item, $this->items, true);
+        }, $this->itemsOfValue($value));
     }
 
     /**
@@ -210,7 +212,7 @@ class ArrayManyToMany implements FromManyToMany
      */
     public function offsetsOfValues($values)
     {
-
+        return array_map([$this, 'offsetsOfValue'], $values);
     }
 
     /**
@@ -218,7 +220,9 @@ class ArrayManyToMany implements FromManyToMany
      */
     public function keysOfValue($value)
     {
-
+        return array_map(function (Entry $item) {
+            return $item->key();
+        }, $this->itemsOfValue($value));
     }
 
     /**
@@ -226,7 +230,7 @@ class ArrayManyToMany implements FromManyToMany
      */
     public function keysOfValues($values)
     {
-
+        return array_map([$this, 'keysOfValue'], $values);
     }
 
     /**
@@ -234,7 +238,8 @@ class ArrayManyToMany implements FromManyToMany
      */
     public function itemsOfValue($value)
     {
-
+        $values = array_search($value, $this->values, true);
+        return $values === false ? [] : $this->valuesItems[$values];
     }
 
     /**
@@ -242,7 +247,7 @@ class ArrayManyToMany implements FromManyToMany
      */
     public function itemsOfValues($values)
     {
-
+        return array_map([$this, 'itemsOfValue'], $values);
     }
     /*******************************************************************************************************************
      * End FromMany
