@@ -1,6 +1,8 @@
 <?php
 
-namespace ProjxIO\Collections\Common;
+namespace ProjxIO\Collections;
+
+use ProjxIO\Collections\Common\Entry;
 
 class EntryItem implements Entry
 {

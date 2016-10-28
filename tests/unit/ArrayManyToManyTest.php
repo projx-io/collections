@@ -2,8 +2,6 @@
 
 namespace ProjxIO\Collections;
 
-use ProjxIO\Collections\Common\EntryItem;
-
 class ArrayManyToManyTest extends TestCase
 {
     public function testConstructorEmpty()

@@ -3,7 +3,6 @@
 namespace ProjxIO\Collections;
 
 use ProjxIO\Collections\Common\Entry;
-use ProjxIO\Collections\Common\EntryItem;
 use ProjxIO\Collections\Common\FromManyToMany;
 
 class ArrayManyToMany implements FromManyToMany
@@ -264,7 +263,7 @@ class ArrayManyToMany implements FromManyToMany
     /**
      * @inheritDoc
      */
-    public function offsetsOfItem($item)
+    public function offsetsOfItem(Entry $item)
     {
         return $this->offsetsOfEntry($item->key(), $item->value());
     }
