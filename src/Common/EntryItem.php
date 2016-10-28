@@ -2,7 +2,7 @@
 
 namespace ProjxIO\Collections\Common;
 
-class Item implements Entry
+class EntryItem implements Entry
 {
     /**
      * @var mixed

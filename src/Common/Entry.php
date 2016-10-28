@@ -2,9 +2,6 @@
 
 namespace ProjxIO\Collections\Common;
 
-/**
- * @package Test
- */
 interface Entry
 {
     /**
