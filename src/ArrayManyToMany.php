@@ -148,7 +148,9 @@ class ArrayManyToMany implements FromManyToMany
      */
     public function offsetsOfKey($key)
     {
-
+        return array_map(function ($item) {
+            return array_search($item, $this->items, true);
+        }, $this->itemsOfKey($key));
     }
 
     /**
@@ -156,7 +158,7 @@ class ArrayManyToMany implements FromManyToMany
      */
     public function offsetsOfKeys($keys)
     {
-
+        return array_map([$this, 'offsetsOfKey'], $keys);
     }
 
     /**
@@ -164,7 +166,9 @@ class ArrayManyToMany implements FromManyToMany
      */
     public function valuesOfKey($key)
     {
-
+        return array_map(function (Entry $item) {
+            return $item->value();
+        }, $this->itemsOfKey($key));
     }
 
     /**
@@ -172,7 +176,7 @@ class ArrayManyToMany implements FromManyToMany
      */
     public function valuesOfKeys($keys)
     {
-
+        return array_map([$this, 'valuesOfKey'], $keys);
     }
 
     /**
@@ -180,7 +184,8 @@ class ArrayManyToMany implements FromManyToMany
      */
     public function itemsOfKey($key)
     {
-
+        $keys = array_search($key, $this->keys, true);
+        return $keys === false ? [] : $this->keysItems[$keys];
     }
 
     /**
@@ -188,7 +193,7 @@ class ArrayManyToMany implements FromManyToMany
      */
     public function itemsOfKeys($keys)
     {
-
+        return array_map([$this, 'itemsOfKey'], $keys);
     }
     /*******************************************************************************************************************
      * End ToMany
