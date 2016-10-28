@@ -8,7 +8,7 @@ interface FromToMany extends FromToOneMany
      * @param Entry $item
      * @return int[]
      */
-    public function offsetsOfItem($item);
+    public function offsetsOfItem(Entry $item);
 
     /**
      * @param mixed $key

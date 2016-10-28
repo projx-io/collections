@@ -40,15 +40,6 @@ class TestCase extends PHPUnit_Framework_TestCase
         });
     }
 
-    public function __call($name, $arguments)
-    {
-        if (preg_match('/^collectionProvider/', $name)) {
-            return $this->collectionProviderType(str_replace('collectionProvider', '', $name));
-        }
-
-        throw new \Exception('Method ' . $name . ' is undefined');
-    }
-
     public function assertThrows($class, callable $callback, array $params = [])
     {
         $error = null;
@@ -104,8 +95,7 @@ class TestCase extends PHPUnit_Framework_TestCase
      */
     public function assertItem(Entry $expect, Entry $actual)
     {
-        $this->assertEquals($expect->value(), $actual->value());
-        $this->assertEquals($expect->key(), $actual->key());
+        $this->assertEntry($expect->key(), $expect->value(), $actual);
     }
 
     /**
