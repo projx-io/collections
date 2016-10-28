@@ -94,7 +94,7 @@ class ArrayManyToMany implements FromManyToMany
      */
     public function valueOfOffset($offset)
     {
-
+        return $this->itemOfOffset($offset)->value();
     }
 
     /**
@@ -102,7 +102,7 @@ class ArrayManyToMany implements FromManyToMany
      */
     public function valueOfOffsets($offsets)
     {
-
+        return array_map([$this, 'valueOfOffset'], $offsets);
     }
 
     /**
@@ -110,7 +110,7 @@ class ArrayManyToMany implements FromManyToMany
      */
     public function keyOfOffset($offset)
     {
-
+        return $this->itemOfOffset($offset)->key();
     }
 
     /**
@@ -118,7 +118,7 @@ class ArrayManyToMany implements FromManyToMany
      */
     public function keyOfOffsets($offsets)
     {
-
+        return array_map([$this, 'keyOfOffset'], $offsets);
     }
 
     /**
@@ -126,7 +126,7 @@ class ArrayManyToMany implements FromManyToMany
      */
     public function itemOfOffset($offset)
     {
-
+        return $this->items[$offset];
     }
 
     /**
@@ -134,7 +134,7 @@ class ArrayManyToMany implements FromManyToMany
      */
     public function itemOfOffsets($offsets)
     {
-
+        return array_map([$this, 'itemOfOffset'], $offsets);
     }
     /*******************************************************************************************************************
      * End ToFromOneMany
