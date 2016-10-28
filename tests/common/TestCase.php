@@ -5,10 +5,50 @@ namespace ProjxIO\Collections;
 use Exception;
 use PHPUnit_Framework_TestCase;
 use ProjxIO\Collections\Common\Entry;
+use ProjxIO\Collections\Common\EntryItem;
 use ProjxIO\Collections\Common\SequentialEntry;
 
 class TestCase extends PHPUnit_Framework_TestCase
 {
+    public function collectionProvider()
+    {
+        $items = [
+            new EntryItem('A', 'X'),
+            new EntryItem('B', 'Y'),
+            new EntryItem('C', 'Z'),
+            new EntryItem('D', 'X'),
+            new EntryItem('A', 'Y'),
+            new EntryItem('B', 'Z'),
+        ];
+
+        return [
+            [new ArrayManyToMany($items)],
+        ];
+    }
+
+    public function collectionProviderTest()
+    {
+        $ref = new \ReflectionObject($this);
+        $type = str_replace('Test', '', $ref->getName());
+        return $this->collectionProviderType($type);
+    }
+
+    public function collectionProviderType($type)
+    {
+        return array_filter($this->collectionProvider(), function ($case) use ($type) {
+            return $case[0] instanceof $type;
+        });
+    }
+
+    public function __call($name, $arguments)
+    {
+        if (preg_match('/^collectionProvider/', $name)) {
+            return $this->collectionProviderType(str_replace('collectionProvider', '', $name));
+        }
+
+        throw new \Exception('Method ' . $name . ' is undefined');
+    }
+
     public function assertThrows($class, callable $callback, array $params = [])
     {
         $error = null;

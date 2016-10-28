@@ -2,50 +2,34 @@
 
 namespace ProjxIO\Collections\Common;
 
-use ProjxIO\Collections\ArrayManyToMany;
 use ProjxIO\Collections\TestCase;
 
 class FromToManyTest extends TestCase
 {
-    public function testOffsetsOfEntry()
+    /**
+     * @dataProvider collectionProviderTest
+     * @param FromToMany $collection
+     */
+    public function testOffsetsOfEntry(FromToMany $collection)
     {
-        $collection = new ArrayManyToMany([
-            new EntryItem('A', 'X'),
-            new EntryItem('B', 'Y'),
-            new EntryItem('C', 'Z'),
-            new EntryItem('D', 'X'),
-            new EntryItem('A', 'Y'),
-            new EntryItem('B', 'Z'),
-        ]);
-
         $this->assertEquals([4], $collection->offsetsOfEntry('A', 'Y'));
     }
 
-    public function testOffsetsOfItem()
+    /**
+     * @dataProvider collectionProviderTest
+     * @param FromToMany $collection
+     */
+    public function testOffsetsOfItem(FromToMany $collection)
     {
-        $collection = new ArrayManyToMany([
-            new EntryItem('A', 'X'),
-            new EntryItem('B', 'Y'),
-            new EntryItem('C', 'Z'),
-            new EntryItem('D', 'X'),
-            new EntryItem('A', 'Y'),
-            new EntryItem('B', 'Z'),
-        ]);
-
         $this->assertEquals([4], $collection->offsetsOfItem(new EntryItem('A', 'Y')));
     }
 
-    public function testOffsetsOfItems()
+    /**
+     * @dataProvider collectionProviderTest
+     * @param FromToMany $collection
+     */
+    public function testOffsetsOfItems(FromToMany $collection)
     {
-        $collection = new ArrayManyToMany([
-            new EntryItem('A', 'X'),
-            new EntryItem('B', 'Y'),
-            new EntryItem('C', 'Z'),
-            new EntryItem('D', 'X'),
-            new EntryItem('A', 'Y'),
-            new EntryItem('B', 'Z'),
-        ]);
-
         $items = [
             new EntryItem('A', 'X'),
             new EntryItem('A', 'Y'),

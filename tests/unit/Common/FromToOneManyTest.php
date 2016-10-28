@@ -2,92 +2,61 @@
 
 namespace ProjxIO\Collections\Common;
 
-use ProjxIO\Collections\ArrayManyToMany;
 use ProjxIO\Collections\TestCase;
 
 class FromToOneManyTest extends TestCase
 {
-    public function testValueOfOffset()
+    /**
+     * @dataProvider collectionProviderTest
+     * @param FromToOneMany $collection
+     */
+    public function testValueOfOffset(FromToOneMany $collection)
     {
-        $collection = new ArrayManyToMany([
-            new EntryItem('A', 'X'),
-            new EntryItem('B', 'Y'),
-            new EntryItem('C', 'Z'),
-            new EntryItem('D', 'X'),
-            new EntryItem('A', 'Y'),
-            new EntryItem('B', 'Z'),
-        ]);
-
         $this->assertEquals('Y', $collection->valueOfOffset(4));
     }
 
-    public function testValueOfOffsets()
+    /**
+     * @dataProvider collectionProviderTest
+     * @param FromToOneMany $collection
+     */
+    public function testValueOfOffsets(FromToOneMany $collection)
     {
-        $collection = new ArrayManyToMany([
-            new EntryItem('A', 'X'),
-            new EntryItem('B', 'Y'),
-            new EntryItem('C', 'Z'),
-            new EntryItem('D', 'X'),
-            new EntryItem('A', 'Y'),
-            new EntryItem('B', 'Z'),
-        ]);
-
         $this->assertEquals(['Y', 'X'], $collection->valueOfOffsets([4, 0]));
     }
 
-    public function testKeyOfOffset()
+    /**
+     * @dataProvider collectionProviderTest
+     * @param FromToOneMany $collection
+     */
+    public function testKeyOfOffset(FromToOneMany $collection)
     {
-        $collection = new ArrayManyToMany([
-            new EntryItem('A', 'X'),
-            new EntryItem('B', 'Y'),
-            new EntryItem('C', 'Z'),
-            new EntryItem('D', 'X'),
-            new EntryItem('A', 'Y'),
-            new EntryItem('B', 'Z'),
-        ]);
-
         $this->assertEquals('A', $collection->keyOfOffset(4));
     }
 
-    public function testKeyOfOffsets()
+    /**
+     * @dataProvider collectionProviderTest
+     * @param FromToOneMany $collection
+     */
+    public function testKeyOfOffsets(FromToOneMany $collection)
     {
-        $collection = new ArrayManyToMany([
-            new EntryItem('A', 'X'),
-            new EntryItem('B', 'Y'),
-            new EntryItem('C', 'Z'),
-            new EntryItem('D', 'X'),
-            new EntryItem('A', 'Y'),
-            new EntryItem('B', 'Z'),
-        ]);
-
         $this->assertEquals(['D', 'A'], $collection->keyOfOffsets([3, 0]));
     }
 
-    public function testItemOfOffset()
+    /**
+     * @dataProvider collectionProviderTest
+     * @param FromToOneMany $collection
+     */
+    public function testItemOfOffset(FromToOneMany $collection)
     {
-        $collection = new ArrayManyToMany([
-            new EntryItem('A', 'X'),
-            new EntryItem('B', 'Y'),
-            new EntryItem('C', 'Z'),
-            new EntryItem('D', 'X'),
-            new EntryItem('A', 'Y'),
-            new EntryItem('B', 'Z'),
-        ]);
-
         $this->assertItem(new EntryItem('A', 'Y'), $collection->itemOfOffset(4));
     }
 
-    public function testItemOfOffsets()
+    /**
+     * @dataProvider collectionProviderTest
+     * @param FromToOneMany $collection
+     */
+    public function testItemOfOffsets(FromToOneMany $collection)
     {
-        $collection = new ArrayManyToMany([
-            new EntryItem('A', 'X'),
-            new EntryItem('B', 'Y'),
-            new EntryItem('C', 'Z'),
-            new EntryItem('D', 'X'),
-            new EntryItem('A', 'Y'),
-            new EntryItem('B', 'Z'),
-        ]);
-
         $items = [
             new EntryItem('A', 'X'),
             new EntryItem('A', 'Y'),

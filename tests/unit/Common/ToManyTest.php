@@ -2,78 +2,52 @@
 
 namespace ProjxIO\Collections\Common;
 
-use ProjxIO\Collections\ArrayManyToMany;
 use ProjxIO\Collections\TestCase;
 
 class ToManyTest extends TestCase
 {
-    public function testOffsetsOfKey()
+    /**
+     * @dataProvider collectionProviderTest
+     * @param ToMany $collection
+     */
+    public function testOffsetsOfKey(ToMany $collection)
     {
-        $collection = new ArrayManyToMany([
-            new EntryItem('A', 'X'),
-            new EntryItem('B', 'Y'),
-            new EntryItem('C', 'Z'),
-            new EntryItem('D', 'X'),
-            new EntryItem('A', 'Y'),
-            new EntryItem('B', 'Z'),
-        ]);
-
         $this->assertEquals([0, 4], $collection->offsetsOfKey('A'));
     }
 
-    public function testOffsetsOfKeys()
+    /**
+     * @dataProvider collectionProviderTest
+     * @param ToMany $collection
+     */
+    public function testOffsetsOfKeys(ToMany $collection)
     {
-        $collection = new ArrayManyToMany([
-            new EntryItem('A', 'X'),
-            new EntryItem('B', 'Y'),
-            new EntryItem('C', 'Z'),
-            new EntryItem('D', 'X'),
-            new EntryItem('A', 'Y'),
-            new EntryItem('B', 'Z'),
-        ]);
-
         $this->assertEquals([[0, 4], [2]], $collection->offsetsOfKeys(['A', 'C']));
     }
 
-    public function testValuesOfKey()
+    /**
+     * @dataProvider collectionProviderTest
+     * @param ToMany $collection
+     */
+    public function testValuesOfKey(ToMany $collection)
     {
-        $collection = new ArrayManyToMany([
-            new EntryItem('A', 'X'),
-            new EntryItem('B', 'Y'),
-            new EntryItem('C', 'Z'),
-            new EntryItem('D', 'X'),
-            new EntryItem('A', 'Y'),
-            new EntryItem('B', 'Z'),
-        ]);
-
         $this->assertEquals(['X', 'Y'], $collection->valuesOfKey('A'));
     }
 
-    public function testValuesOfKeys()
+    /**
+     * @dataProvider collectionProviderTest
+     * @param ToMany $collection
+     */
+    public function testValuesOfKeys(ToMany $collection)
     {
-        $collection = new ArrayManyToMany([
-            new EntryItem('A', 'X'),
-            new EntryItem('B', 'Y'),
-            new EntryItem('C', 'Z'),
-            new EntryItem('D', 'X'),
-            new EntryItem('A', 'Y'),
-            new EntryItem('B', 'Z'),
-        ]);
-
         $this->assertEquals([['X', 'Y'], ['X']], $collection->valuesOfKeys(['A', 'D']));
     }
 
-    public function testItemsOfKey()
+    /**
+     * @dataProvider collectionProviderTest
+     * @param ToMany $collection
+     */
+    public function testItemsOfKey(ToMany $collection)
     {
-        $collection = new ArrayManyToMany([
-            new EntryItem('A', 'X'),
-            new EntryItem('B', 'Y'),
-            new EntryItem('C', 'Z'),
-            new EntryItem('D', 'X'),
-            new EntryItem('A', 'Y'),
-            new EntryItem('B', 'Z'),
-        ]);
-
         $items = [
             new EntryItem('A', 'X'),
             new EntryItem('A', 'Y'),
@@ -82,17 +56,12 @@ class ToManyTest extends TestCase
         $this->assertItems($items, $collection->itemsOfKey('A'));
     }
 
-    public function testItemsOfKeys()
+    /**
+     * @dataProvider collectionProviderTest
+     * @param ToMany $collection
+     */
+    public function testItemsOfKeys(ToMany $collection)
     {
-        $collection = new ArrayManyToMany([
-            new EntryItem('A', 'X'),
-            new EntryItem('B', 'Y'),
-            new EntryItem('C', 'Z'),
-            new EntryItem('D', 'X'),
-            new EntryItem('A', 'Y'),
-            new EntryItem('B', 'Z'),
-        ]);
-
         $items = [
             [
                 new EntryItem('A', 'X'),
