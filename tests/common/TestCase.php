@@ -9,26 +9,25 @@ use ProjxIO\Collections\Common\SequentialEntry;
 
 class TestCase extends PHPUnit_Framework_TestCase
 {
-    public function generateCombinations(IntRange $range)
+    public function generateCombinations($min, $max)
     {
         static $sets = [[[]]];
 
-        for ($i = count($sets); $i <= $range->end(); $i++) {
+        for ($i = count($sets); $i <= $max; $i++) {
             $sets[$i] = array_map(function ($set) use ($i) {
                 $set[$i] = $i;
                 return $set;
             }, call_user_func_array('array_merge', $sets));
         }
 
-        return array_filter(call_user_func_array('array_merge', $sets), function ($set) use ($range) {
-            return count($set) >= $range->start() && count($set) <= $range->end();
+        return array_filter(call_user_func_array('array_merge', $sets), function ($set) use ($min, $max) {
+            return count($set) >= $min && count($set) <= $max;
         });
     }
 
-    public function combinations($items, IntRange $range = null)
+    public function combinations(array $items = [], $min = 0, $max = 0)
     {
-        $range = $range ?: new IntRange(0, count($items));
-        $combinations = $this->generateCombinations($range);
+        $combinations = $this->generateCombinations($min, $max ?: count($items));
         return array_map(function ($combination) use ($items) {
             return [
                 array_intersect_key($items, $combination),
