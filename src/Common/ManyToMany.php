@@ -2,7 +2,7 @@
 
 namespace ProjxIO\Collections\Common;
 
-interface FromManyToMany extends FromMany, ToMany
+interface ManyToMany extends FromMany, ToMany
 {
     /**
      * @param mixed $key

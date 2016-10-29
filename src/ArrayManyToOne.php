@@ -3,9 +3,9 @@
 namespace ProjxIO\Collections;
 
 use ProjxIO\Collections\Common\Entry;
-use ProjxIO\Collections\Common\FromManyToOne;
+use ProjxIO\Collections\Common\ManyToOne;
 
-class ArrayManyToOne implements FromManyToOne
+class ArrayManyToOne implements ManyToOne
 {
     /**
      * @var array

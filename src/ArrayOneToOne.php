@@ -3,10 +3,10 @@
 namespace ProjxIO\Collections;
 
 use ProjxIO\Collections\Common\Entry;
-use ProjxIO\Collections\Common\FromManyToOne;
-use ProjxIO\Collections\Common\FromOneToOne;
+use ProjxIO\Collections\Common\ManyToOne;
+use ProjxIO\Collections\Common\OneToOne;
 
-class ArrayOneToOne implements FromOneToOne
+class ArrayOneToOne implements OneToOne
 {
     /**
      * @var array

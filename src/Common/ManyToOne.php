@@ -2,6 +2,6 @@
 
 namespace ProjxIO\Collections\Common;
 
-interface FromOneToMany extends FromOne, ToMany
+interface ManyToOne extends FromMany, ToOne
 {
 }
