@@ -9,60 +9,93 @@ class FromToOneManyTest extends TestCase
 {
     /**
      * @dataProvider collectionProviderTest
-     * @param FromToOneMany $collection
+     * @param FromMany $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
      */
-    public function testValueOfOffset(FromToOneMany $collection)
+    public function testValueOfOffset(FromMany $collection, $v, $ks, $k, $vs)
     {
-        $this->assertEquals('Y', $collection->valueOfOffset(4));
+        $expect = $v[1];
+        $actual = $collection->valueOfOffset(1);
+        $this->assertEquals($expect, $actual);
     }
 
     /**
      * @dataProvider collectionProviderTest
-     * @param FromToOneMany $collection
+     * @param FromMany $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
      */
-    public function testValueOfOffsets(FromToOneMany $collection)
+    public function testValueOfOffsets(FromMany $collection, $v, $ks, $k, $vs)
     {
-        $this->assertEquals(['Y', 'X'], $collection->valueOfOffsets([4, 0]));
+        $expect = [$v[1], $v[2]];
+        $actual = $collection->valueOfOffsets([1, 2]);
+        $this->assertEquals($expect, $actual);
     }
 
     /**
      * @dataProvider collectionProviderTest
-     * @param FromToOneMany $collection
+     * @param FromMany $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
      */
-    public function testKeyOfOffset(FromToOneMany $collection)
+    public function testKeyOfOffset(FromMany $collection, $v, $ks, $k, $vs)
     {
-        $this->assertEquals('A', $collection->keyOfOffset(4));
+        $expect = $k[1];
+        $actual = $collection->keyOfOffset(1);
+        $this->assertEquals($expect, $actual);
     }
 
     /**
      * @dataProvider collectionProviderTest
-     * @param FromToOneMany $collection
+     * @param FromMany $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
      */
-    public function testKeyOfOffsets(FromToOneMany $collection)
+    public function testKeyOfOffsets(FromMany $collection, $v, $ks, $k, $vs)
     {
-        $this->assertEquals(['D', 'A'], $collection->keyOfOffsets([3, 0]));
+        $expect = [$k[1], $k[2]];
+        $actual = $collection->keyOfOffsets([1, 2]);
+        $this->assertEquals($expect, $actual);
     }
 
     /**
      * @dataProvider collectionProviderTest
-     * @param FromToOneMany $collection
+     * @param FromMany $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
      */
-    public function testItemOfOffset(FromToOneMany $collection)
+    public function testItemOfOffset(FromMany $collection, $v, $ks, $k, $vs)
     {
-        $this->assertItem(new EntryItem('A', 'Y'), $collection->itemOfOffset(4));
+        $key = $k[1];
+        $value = $v[1];
+        $actual = $collection->itemOfOffset(1);
+        $this->assertEntry($key, $value, $actual);
     }
 
     /**
      * @dataProvider collectionProviderTest
-     * @param FromToOneMany $collection
+     * @param FromMany $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
      */
-    public function testItemOfOffsets(FromToOneMany $collection)
+    public function testItemOfOffsets(FromMany $collection, $v, $ks, $k, $vs)
     {
-        $items = [
-            new EntryItem('A', 'X'),
-            new EntryItem('A', 'Y'),
-        ];
-
-        $this->assertItems($items, $collection->itemOfOffsets([0, 4]));
+        $keys = [$k[1], $k[2]];
+        $values = [$v[1], $v[2]];
+        $actual = $collection->itemOfOffsets([1, 2]);
+        $this->assertEntries($keys, $values, $actual);
     }
 }
