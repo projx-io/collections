@@ -2,9 +2,6 @@
 
 namespace ProjxIO\Collections\Common;
 
-use ProjxIO\Collections\ArrayManyToMany;
-use ProjxIO\Collections\ArrayManyToOne;
-use ProjxIO\Collections\EntryItem;
 use ProjxIO\Collections\TestCase;
 
 class FromManyTest extends TestCase

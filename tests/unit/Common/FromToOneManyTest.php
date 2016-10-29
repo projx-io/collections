@@ -2,7 +2,6 @@
 
 namespace ProjxIO\Collections\Common;
 
-use ProjxIO\Collections\EntryItem;
 use ProjxIO\Collections\TestCase;
 
 class FromToOneManyTest extends TestCase
