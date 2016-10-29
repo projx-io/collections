@@ -260,6 +260,7 @@ class ArrayManyToOne implements FromManyToOne
      */
     public function offsetOfItem($item)
     {
+        return $this->offsetOfEntry($item->key(), $item->value());
     }
 
     /**
@@ -267,7 +268,8 @@ class ArrayManyToOne implements FromManyToOne
      */
     public function offsetOfEntry($key, $value)
     {
-
+        $offset = $this->offsetOfKey($key);
+        return $offset !== false && $this->itemOfOffset($offset)->value() === $value ? $offset : false;
     }
 
     /**
@@ -275,7 +277,7 @@ class ArrayManyToOne implements FromManyToOne
      */
     public function offsetOfItems($items)
     {
-
+        return array_map([$this, 'offsetOfItem'], $items);
     }
     /*******************************************************************************************************************
      * End FromToOne
