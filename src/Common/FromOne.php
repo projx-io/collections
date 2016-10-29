@@ -30,7 +30,7 @@ interface FromOne extends FromToOne
 
     /**
      * @param mixed $value
-     * @return mixed
+     * @return Entry
      */
     public function itemOfValue($value);
 
