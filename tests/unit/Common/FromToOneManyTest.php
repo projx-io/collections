@@ -14,6 +14,53 @@ class FromToOneManyTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
+    public function testKeys(FromToOneMany $collection, $v, $ks, $k, $vs)
+    {
+        $expect = $k;
+        $actual = $collection->keys();
+        $this->assertEquals($expect, $actual);
+    }
+
+    /**
+     * @dataProvider collectionProviderTest
+     * @param FromToOneMany $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
+     */
+    public function testValues(FromToOneMany $collection, $v, $ks, $k, $vs)
+    {
+        $expect = $v;
+        $actual = $collection->values();
+        $this->assertEquals($expect, $actual);
+    }
+
+    /**
+     * @dataProvider collectionProviderTest
+     * @param FromToOneMany $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
+     * @param Entry[] $i
+     * @param Entry[][] $is
+     */
+    public function testItems(FromToOneMany $collection, $v, $ks, $k, $vs, $i, $is)
+    {
+        $expect = $i;
+        $actual = $collection->items();
+        $this->assertItems($expect, $actual);
+    }
+
+    /**
+     * @dataProvider collectionProviderTest
+     * @param FromToOneMany $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
+     */
     public function testValueOfOffset(FromToOneMany $collection, $v, $ks, $k, $vs)
     {
         $expect = $v[1];

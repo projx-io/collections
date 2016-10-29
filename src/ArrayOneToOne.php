@@ -3,7 +3,6 @@
 namespace ProjxIO\Collections;
 
 use ProjxIO\Collections\Common\Entry;
-use ProjxIO\Collections\Common\ManyToOne;
 use ProjxIO\Collections\Common\OneToOne;
 
 class ArrayOneToOne implements OneToOne
@@ -40,6 +39,30 @@ class ArrayOneToOne implements OneToOne
     public function __construct($items = [])
     {
         $this->addItems($items);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function keys()
+    {
+        return $this->keys;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function values()
+    {
+        return $this->values;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function items()
+    {
+        return $this->items;
     }
 
     /**

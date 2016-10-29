@@ -42,6 +42,30 @@ class ArrayManyToOne implements ManyToOne
     }
 
     /**
+     * @inheritDoc
+     */
+    public function keys()
+    {
+        return $this->keys;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function values()
+    {
+        return $this->values;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function items()
+    {
+        return $this->items;
+    }
+
+    /**
      * @param Entry $item
      */
     public function addItem(Entry $item)

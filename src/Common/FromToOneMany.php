@@ -5,6 +5,21 @@ namespace ProjxIO\Collections\Common;
 interface FromToOneMany
 {
     /**
+     * @return mixed[]
+     */
+    public function keys();
+
+    /**
+     * @return mixed[]
+     */
+    public function values();
+
+    /**
+     * @return Entry[]
+     */
+    public function items();
+
+    /**
      * @param int $offset
      * @return mixed
      */
