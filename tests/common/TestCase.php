@@ -144,7 +144,7 @@ class TestCase extends PHPUnit_Framework_TestCase
     {
         return [
             $this->generateCase(ArrayOneToOne::class, $this->itemsOneToOne()),
-//            $this->generateCase(ArrayOneToMany::class, $this->itemsOneToMany()),
+            $this->generateCase(ArrayOneToMany::class, $this->itemsOneToMany()),
             $this->generateCase(ArrayManyToOne::class, $this->itemsManyToOne()),
             $this->generateCase(ArrayManyToMany::class, $this->itemsManyToMany()),
         ];
