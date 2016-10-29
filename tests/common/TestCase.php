@@ -216,7 +216,7 @@ class TestCase extends PHPUnit_Framework_TestCase
     /**
      * @param mixed[] $keys
      * @param mixed[] $values
-     * @param Entry[] $entries
+     * @param Entry[][] $entries
      */
     public function assertEntriesList($keys, $values, $entries)
     {

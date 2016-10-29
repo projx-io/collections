@@ -88,16 +88,16 @@ class FromManyTest extends TestCase
     /**
      * @dataProvider collectionProviderTest
      * @param FromMany $collection
-     * @param mixed[] $v
+     * @param mixed[] $values
      * @param mixed[][] $ks
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testItemsOfValues(FromMany $collection, $v, $ks, $k, $vs)
+    public function testItemsOfValues(FromMany $collection, $values, $ks, $k, $vs)
     {
-        $keys = [array_values($ks[$v[0]]), array_values($ks[$v[1]])];
-        $values = [[$v[0], $v[0]], [$v[1], $v[1]]];
-        $actual = $collection->itemsOfValue($v[0]);
+        $keys = [array_values($ks[$values[0]]), array_values($ks[$values[1]])];
+        $values = [[$values[0], $values[0]], [$values[1], $values[1]]];
+        $actual = $collection->itemsOfValues([$values[0], $values[1]]);
         $this->assertEntriesList($keys, $values, $actual);
     }
 }

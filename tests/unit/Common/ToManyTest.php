@@ -94,7 +94,7 @@ class ToManyTest extends TestCase
     {
         $values = [array_values($vs[$k[0]]), array_values($vs[$k[1]])];
         $keys = [[$k[0], $k[0]], [$k[1], $k[1]]];
-        $actual = $collection->itemsOfKey($k[0]);
+        $actual = $collection->itemsOfKeys([$k[0], $k[1]]);
         $this->assertEntriesList($keys, $values, $actual);
     }
 }
