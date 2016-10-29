@@ -23,12 +23,12 @@ class ArrayManyToMany implements FromManyToMany
     private $items = [];
 
     /**
-     * @var array
+     * @var Entry[][]
      */
     private $keysItems = [];
 
     /**
-     * @var array
+     * @var Entry[][]
      */
     private $valuesItems = [];
 
