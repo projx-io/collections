@@ -5,6 +5,7 @@ namespace ProjxIO\Collections;
 use Exception;
 use PHPUnit_Framework_TestCase;
 use ProjxIO\Collections\Common\Entry;
+use ProjxIO\Collections\Common\FromToOneMany;
 use ProjxIO\Collections\Common\SequentialEntry;
 
 class TestCase extends PHPUnit_Framework_TestCase
@@ -37,18 +38,19 @@ class TestCase extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param $class
+     * @param $collection
      * @param $items
      * @return array
      */
-    public function generateCase($class, $items)
+    public function generateCase(FromToOneMany $collection)
     {
+        $items = $collection->items();
         $v = array_unique(array_map($this->value(), $items));
         $ks = $this->group($items, $this->value(), $this->key());
         $k = array_unique(array_map($this->key(), $items));
         $vs = $this->group($items, $this->key(), $this->value());
 
-        return [new $class($items), $v, $ks, $k, $vs, $items];
+        return [$collection, $v, $ks, $k, $vs, $items];
     }
 
     /**
@@ -141,11 +143,17 @@ class TestCase extends PHPUnit_Framework_TestCase
 
     public function collectionProvider()
     {
+//        $items = $this->itemsOneToOne();
+//        $oto = new ArrayOneToOne();
+//        $oto->addItems($items);
+//        array_shift($items);
+//        $oto->removeOffset(0);
+
         return [
-            $this->generateCase(ArrayOneToOne::class, $this->itemsOneToOne()),
-            $this->generateCase(ArrayOneToMany::class, $this->itemsOneToMany()),
-            $this->generateCase(ArrayManyToOne::class, $this->itemsManyToOne()),
-            $this->generateCase(ArrayManyToMany::class, $this->itemsManyToMany()),
+            $this->generateCase(new ArrayOneToOne($this->itemsOneToOne())),
+            $this->generateCase(new ArrayOneToMany($this->itemsOneToMany())),
+            $this->generateCase(new ArrayManyToOne($this->itemsManyToOne())),
+            $this->generateCase(new ArrayManyToMany($this->itemsManyToMany())),
         ];
     }
 

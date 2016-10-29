@@ -44,9 +44,8 @@ class FromToOneManyTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      * @param Entry[] $i
-     * @param Entry[][] $is
      */
-    public function testItems(FromToOneMany $collection, $v, $ks, $k, $vs, $i, $is)
+    public function testItems(FromToOneMany $collection, $v, $ks, $k, $vs, $i)
     {
         $expect = $i;
         $actual = $collection->items();

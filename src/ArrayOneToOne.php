@@ -66,6 +66,14 @@ class ArrayOneToOne implements OneToOne
     }
 
     /**
+     * @param $offset
+     */
+    public function removeOffset($offset)
+    {
+
+    }
+
+    /**
      * @param Entry $item
      */
     public function addItem(Entry $item)
