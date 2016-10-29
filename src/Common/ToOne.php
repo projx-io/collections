@@ -36,7 +36,7 @@ interface ToOne extends FromToOne
 
     /**
      * @param mixed[] $keys
-     * @return Entry[]
+     * @return Entry
      */
     public function itemOfKeys($keys);
 }

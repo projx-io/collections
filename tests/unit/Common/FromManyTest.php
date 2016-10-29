@@ -2,6 +2,8 @@
 
 namespace ProjxIO\Collections\Common;
 
+use ProjxIO\Collections\ArrayManyToMany;
+use ProjxIO\Collections\ArrayManyToOne;
 use ProjxIO\Collections\EntryItem;
 use ProjxIO\Collections\TestCase;
 
@@ -10,70 +12,92 @@ class FromManyTest extends TestCase
     /**
      * @dataProvider collectionProviderTest
      * @param FromMany $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
      */
-    public function testOffsetsOfValue(FromMany $collection)
+    public function testOffsetsOfValue(FromMany $collection, $v, $ks, $k, $vs)
     {
-        $this->assertEquals([0, 3], $collection->offsetsOfValue('X'));
+        $expect = array_keys($ks[$v[0]]);
+        $actual = $collection->offsetsOfValue($v[0]);
+        $this->assertEquals($expect, $actual);
     }
 
     /**
      * @dataProvider collectionProviderTest
      * @param FromMany $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
      */
-    public function testOffsetsOfValues(FromMany $collection)
+    public function testOffsetsOfValues(FromMany $collection, $v, $ks, $k, $vs)
     {
-        $this->assertEquals([[0, 3], [2, 5]], $collection->offsetsOfValues(['X', 'Z']));
+        $expect = [array_keys($ks[$v[0]]), array_keys($ks[$v[1]])];
+        $actual = $collection->offsetsOfValues([$v[0], $v[1]]);
+        $this->assertEquals($expect, $actual);
     }
 
     /**
      * @dataProvider collectionProviderTest
      * @param FromMany $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
      */
-    public function testKeysOfValue(FromMany $collection)
+    public function testKeysOfValue(FromMany $collection, $v, $ks, $k, $vs)
     {
-        $this->assertEquals(['A', 'D'], $collection->keysOfValue('X'));
+        $expect = array_values($ks[$v[0]]);
+        $actual = $collection->keysOfValue($v[0]);
+        $this->assertEquals($expect, $actual);
     }
 
     /**
      * @dataProvider collectionProviderTest
      * @param FromMany $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
      */
-    public function testKeysOfValues(FromMany $collection)
+    public function testKeysOfValues(FromMany $collection, $v, $ks, $k, $vs)
     {
-        $this->assertEquals([['A', 'D'], ['C', 'B']], $collection->keysOfValues(['X', 'Z']));
+        $expect = [array_values($ks[$v[0]]), array_values($ks[$v[1]])];
+        $actual = $collection->keysOfValues([$v[0], $v[1]]);
+        $this->assertEquals($expect, $actual);
     }
 
     /**
      * @dataProvider collectionProviderTest
      * @param FromMany $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
      */
-    public function testItemsOfValue(FromMany $collection)
+    public function testItemsOfValue(FromMany $collection, $v, $ks, $k, $vs)
     {
-        $items = [
-            new EntryItem('A', 'X'),
-            new EntryItem('D', 'X'),
-        ];
-
-        $this->assertItems($items, $collection->itemsOfValue('X'));
+        $keys = array_values($ks[$v[0]]);
+        $values = [$v[0], $v[0]];
+        $actual = $collection->itemsOfValue($v[0]);
+        $this->assertEntries($keys, $values, $actual);
     }
 
     /**
      * @dataProvider collectionProviderTest
      * @param FromMany $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
      */
-    public function testItemsOfValues(FromMany $collection)
+    public function testItemsOfValues(FromMany $collection, $v, $ks, $k, $vs)
     {
-        $items = [
-            [
-                new EntryItem('A', 'X'),
-                new EntryItem('D', 'X'),
-            ],
-            [
-                new EntryItem('C', 'Z'),
-                new EntryItem('B', 'Z'),
-            ],
-        ];
-
-        $this->assertItemsList($items, $collection->itemsOfValues(['X', 'Z']));
+        $keys = [array_values($ks[$v[0]]), array_values($ks[$v[1]])];
+        $values = [[$v[0], $v[0]], [$v[1], $v[1]]];
+        $actual = $collection->itemsOfValue($v[0]);
+        $this->assertEntriesList($keys, $values, $actual);
     }
 }
