@@ -12,7 +12,7 @@ interface FromOne extends FromToOne
 
     /**
      * @param mixed[] $values
-     * @return mixed
+     * @return mixed[]
      */
     public function offsetOfValues($values);
 
@@ -24,7 +24,7 @@ interface FromOne extends FromToOne
 
     /**
      * @param mixed[] $values
-     * @return mixed
+     * @return mixed[]
      */
     public function keyOfValues($values);
 
@@ -36,7 +36,7 @@ interface FromOne extends FromToOne
 
     /**
      * @param mixed[] $values
-     * @return Entry
+     * @return Entry[]
      */
     public function itemOfValues($values);
 }

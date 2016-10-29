@@ -199,47 +199,6 @@ class ArrayManyToOne implements FromManyToOne
      ******************************************************************************************************************/
 
     /*******************************************************************************************************************
-     * Start ToFromMany
-     ******************************************************************************************************************/
-    /**
-     * @inheritDoc
-     */
-    public function offsetsOfItem(Entry $item)
-    {
-        return $this->offsetsOfEntry($item->key(), $item->value());
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function offsetsOfEntry($key, $value)
-    {
-        $keys = array_search($key, $this->keys, true);
-        $values = array_search($value, $this->values, true);
-        $keys = $keys === false ? [] : $this->keysItem[$keys];
-        $values = $values === false ? [] : $this->valuesItems[$values];
-
-        $items = array_values(array_filter($keys, function ($item) use ($values) {
-            return array_search($item, $values, true) !== false;
-        }));
-
-        return array_map(function ($item) {
-            return array_search($item, $this->items, true);
-        }, $items);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function offsetsOfItems($items)
-    {
-        return array_map([$this, 'offsetsOfItem'], $items);
-    }
-    /*******************************************************************************************************************
-     * End ToFromMany
-     ******************************************************************************************************************/
-
-    /*******************************************************************************************************************
      * End ToOne
      ******************************************************************************************************************/
     /**

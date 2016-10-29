@@ -4,6 +4,9 @@ namespace ProjxIO\Collections\Common;
 
 use ProjxIO\Collections\TestCase;
 
+/**
+ * @dataProvider
+ */
 class FromManyTest extends TestCase
 {
     /**
