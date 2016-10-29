@@ -11,17 +11,27 @@ class TestCase extends PHPUnit_Framework_TestCase
 {
     public function collectionProvider()
     {
-        $items = [
-            new EntryItem('A', 'X'),
-            new EntryItem('B', 'Y'),
-            new EntryItem('C', 'Z'),
-            new EntryItem('D', 'X'),
-            new EntryItem('A', 'Y'),
-            new EntryItem('B', 'Z'),
-        ];
-
         return [
-            [new ArrayManyToMany($items)],
+            [
+                new ArrayManyToMany([
+                    new EntryItem('A', 'X'),
+                    new EntryItem('B', 'Y'),
+                    new EntryItem('C', 'Z'),
+                    new EntryItem('D', 'X'),
+                    new EntryItem('A', 'Y'),
+                    new EntryItem('B', 'Z'),
+                ])
+            ],
+            [
+                new ArrayManyToOne([
+                    new EntryItem('A', 'X'),
+                    new EntryItem('B', 'Y'),
+                    new EntryItem('C', 'Z'),
+                    new EntryItem('D', 'X'),
+                    new EntryItem('E', 'Y'),
+                    new EntryItem('F', 'Z'),
+                ])
+            ],
         ];
     }
 
