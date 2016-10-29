@@ -12,7 +12,7 @@ interface FromToOneMany
 
     /**
      * @param int[] $offsets
-     * @return mixed
+     * @return mixed[]
      */
     public function valueOfOffsets($offsets);
 
@@ -24,7 +24,7 @@ interface FromToOneMany
 
     /**
      * @param int[] $offsets
-     * @return mixed
+     * @return mixed[]
      */
     public function keyOfOffsets($offsets);
 

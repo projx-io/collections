@@ -12,7 +12,7 @@ interface ToOne extends FromToOne
 
     /**
      * @param mixed[] $keys
-     * @return mixed
+     * @return mixed[]
      */
     public function offsetOfKeys($keys);
 
@@ -24,7 +24,7 @@ interface ToOne extends FromToOne
 
     /**
      * @param mixed[] $keys
-     * @return mixed
+     * @return mixed[]
      */
     public function valueOfKeys($keys);
 
