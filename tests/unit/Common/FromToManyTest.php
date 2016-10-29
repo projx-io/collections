@@ -10,32 +10,51 @@ class FromToManyTest extends TestCase
     /**
      * @dataProvider collectionProviderTest
      * @param FromToMany $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
      */
-    public function testOffsetsOfEntry(FromToMany $collection)
+    public function testOffsetsOfEntry(FromToMany $collection, $v, $ks, $k, $vs)
     {
-        $this->assertEquals([4], $collection->offsetsOfEntry('A', 'Y'));
+        $expect = array_intersect(array_keys($ks[$v[0]]), array_keys($vs[$k[0]]));
+        $actual = $collection->offsetsOfEntry($k[0], $v[0]);
+        $this->assertEquals($expect, $actual);
     }
 
     /**
      * @dataProvider collectionProviderTest
      * @param FromToMany $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
      */
-    public function testOffsetsOfItem(FromToMany $collection)
+    public function testOffsetsOfItem(FromToMany $collection, $v, $ks, $k, $vs)
     {
-        $this->assertEquals([4], $collection->offsetsOfItem(new EntryItem('A', 'Y')));
+        $expect = array_intersect(array_keys($ks[$v[0]]), array_keys($vs[$k[0]]));
+        $actual = $collection->offsetsOfItem(new EntryItem($k[0], $v[0]));
+        $this->assertEquals($expect, $actual);
     }
 
     /**
      * @dataProvider collectionProviderTest
      * @param FromToMany $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
      */
-    public function testOffsetsOfItems(FromToMany $collection)
+    public function testOffsetsOfItems(FromToMany $collection, $v, $ks, $k, $vs)
     {
-        $items = [
-            new EntryItem('A', 'X'),
-            new EntryItem('A', 'Y'),
+        $expect = [
+            array_intersect(array_keys($ks[$v[0]]), array_keys($vs[$k[0]])),
+            array_intersect(array_keys($ks[$v[1]]), array_keys($vs[$k[1]])),
         ];
-
-        $this->assertEquals([[0], [4]], $collection->offsetsOfItems($items));
+        $actual = $collection->offsetsOfItems([
+            new EntryItem($k[0], $v[0]),
+            new EntryItem($k[1], $v[1]),
+        ]);
+        $this->assertEquals($expect, $actual);
     }
 }
