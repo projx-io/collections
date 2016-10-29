@@ -10,59 +10,92 @@ class ToOneTest extends TestCase
     /**
      * @dataProvider collectionProviderTest
      * @param ToOne $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
      */
-    public function testOffsetOfKey(ToOne $collection)
+    public function testOffsetOfKey(ToOne $collection, $v, $ks, $k, $vs)
     {
-        $this->assertEquals(2, $collection->offsetOfKey('C'));
+        $expect = array_keys($vs[$k[0]])[0];
+        $actual = $collection->offsetOfKey($k[0]);
+        $this->assertEquals($expect, $actual);
     }
 
     /**
      * @dataProvider collectionProviderTest
      * @param ToOne $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
      */
-    public function testOffsetOfKeys(ToOne $collection)
+    public function testOffsetOfKeys(ToOne $collection, $v, $ks, $k, $vs)
     {
-        $this->assertEquals([2, 4], $collection->offsetOfKeys(['C', 'E']));
+        $expect = [array_keys($vs[$k[0]])[0], array_keys($vs[$k[1]])[0]];
+        $actual = $collection->offsetOfKeys([$k[0], $k[1]]);
+        $this->assertEquals($expect, $actual);
     }
 
     /**
      * @dataProvider collectionProviderTest
      * @param ToOne $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
      */
-    public function testValueOfKey(ToOne $collection)
+    public function testValueOfKey(ToOne $collection, $v, $ks, $k, $vs)
     {
-        $this->assertEquals('Z', $collection->valueOfKey('C'));
+        $expect = array_values($vs[$k[0]])[0];
+        $actual = $collection->valueOfKey($k[0]);
+        $this->assertEquals($expect, $actual);
     }
 
     /**
      * @dataProvider collectionProviderTest
      * @param ToOne $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
      */
-    public function testValueOfKeys(ToOne $collection)
+    public function testValueOfKeys(ToOne $collection, $v, $ks, $k, $vs)
     {
-        $this->assertEquals(['Z', 'Y'], $collection->valueOfKeys(['C', 'E']));
+        $expect = [array_values($vs[$k[0]])[0], array_values($vs[$k[1]])[0]];
+        $actual = $collection->valueOfKeys([$k[0], $k[1]]);
+        $this->assertEquals($expect, $actual);
     }
 
     /**
      * @dataProvider collectionProviderTest
      * @param ToOne $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
      */
-    public function testItemOfKey(ToOne $collection)
+    public function testItemOfKey(ToOne $collection, $v, $ks, $k, $vs)
     {
-        $this->assertItem(new EntryItem('C', 'Z'), $collection->itemOfKey('C'));
+        $key = $k[0];
+        $value = $vs[$k[0]][0];
+        $actual = $collection->itemOfKey($k[0]);
+        $this->assertEntry($key, $value, $actual);
     }
 
     /**
      * @dataProvider collectionProviderTest
      * @param ToOne $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
      */
-    public function testItemOfKeys(ToOne $collection)
+    public function testItemOfKeys(ToOne $collection, $v, $ks, $k, $vs)
     {
-        $items = [
-            new EntryItem('C', 'Z'),
-            new EntryItem('E', 'Y'),
-        ];
-
-        $this->assertItems($items, $collection->itemOfKeys(['C', 'E']));
+        $key = [$k[0], $k[1]];
+        $value = [array_values($vs[$k[0]])[0], array_values($vs[$k[1]])[0]];
+        $actual = $collection->itemOfKeys([$k[0], $k[1]]);
+        $this->assertEntries($key, $value, $actual);
     }
 }
