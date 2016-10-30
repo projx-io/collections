@@ -6,7 +6,7 @@ use ProjxIO\Collections\Common\Entry;
 use ProjxIO\Collections\Common\ManyToOne;
 use ProjxIO\Collections\Common\MutableFromToOne;
 
-class ArrayManyToOne implements ManyToOne//, MutableFromToOne
+class ArrayManyToOne implements ManyToOne, MutableFromToOne
 {
     /**
      * @var array
@@ -431,7 +431,7 @@ class ArrayManyToOne implements ManyToOne//, MutableFromToOne
      */
     public function removeKeys($keys)
     {
-        $this->removeItems($this->itemOfKeys($keys));
+        array_map([$this, 'removeKey'], $keys);
     }
 
     /**
@@ -459,8 +459,8 @@ class ArrayManyToOne implements ManyToOne//, MutableFromToOne
             return;
         }
 
-        $keyOffset = array_search($value, $this->keys, true);
-        $valueOffset = array_search($key, $this->values, true);
+        $keyOffset = array_search($key, $this->keys, true);
+        $valueOffset = array_search($value, $this->values, true);
         $item = $this->items[$keyOffset];
         $itemOffset = array_search($item, $this->items, true);
         $valueItemOffset = array_search($item, $this->valuesItems, true);
