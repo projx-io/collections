@@ -314,6 +314,30 @@ class ArrayOneToOne implements OneToOne, MutableFromToOne
      * End MutableFromToOne
      ******************************************************************************************************************/
     /**
+     * @inheritDoc
+     */
+    public function putEntry($key, $value)
+    {
+        $this->addEntry($key, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function putItem(Entry $item)
+    {
+
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function putItems($items)
+    {
+
+    }
+
+    /**
      * @param $offset
      */
     public function removeOffset($offset)
@@ -373,7 +397,7 @@ class ArrayOneToOne implements OneToOne, MutableFromToOne
     /**
      * @inheritDoc
      */
-    public function removeItem($item)
+    public function removeItem(Entry $item)
     {
         return $this->removeEntry($item->key(), $item->value());
     }

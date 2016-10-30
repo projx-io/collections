@@ -5,6 +5,22 @@ namespace ProjxIO\Collections\Common;
 interface MutableFromToOne extends FromToOne
 {
     /**
+     * @param mixed $key
+     * @param mixed $value
+     */
+    public function putEntry($key, $value);
+
+    /**
+     * @param Entry $item
+     */
+    public function putItem(Entry $item);
+
+    /**
+     * @param Entry[] $items
+     */
+    public function putItems($items);
+
+    /**
      * @param int $offset
      */
     public function removeOffset($offset);
@@ -37,7 +53,7 @@ interface MutableFromToOne extends FromToOne
     /**
      * @param Entry $item
      */
-    public function removeItem($item);
+    public function removeItem(Entry $item);
 
     /**
      * @param Entry[] $items
