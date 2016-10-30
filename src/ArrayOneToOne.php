@@ -356,7 +356,7 @@ class ArrayOneToOne implements OneToOne, MutableFromToOne
      */
     public function putItems($items)
     {
-
+        array_map([$this, 'putItem'], $items);
     }
 
     /**

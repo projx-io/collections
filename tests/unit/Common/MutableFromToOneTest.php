@@ -50,6 +50,25 @@ class MutableFromToOneTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
+    public function testPutItems(MutableFromToOne $collection, $v, $ks, $k, $vs)
+    {
+        $items = [
+            new EntryItem('MM', 'NN'),
+            new EntryItem('OO', 'PP'),
+        ];
+        $this->assertFalse($collection->containsItems($items));
+        $collection->putItems($items);
+        $this->assertTrue($collection->containsItems($items));
+    }
+
+    /**
+     * @dataProvider collectionProviderTest
+     * @param MutableFromToOne $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
+     */
     public function testRemoveOffset(MutableFromToOne $collection, $v, $ks, $k, $vs)
     {
         $this->assertTrue($collection->containsEntry($k[0], $v[0]));
