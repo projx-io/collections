@@ -42,30 +42,6 @@ class ArrayOneToMany implements OneToMany
     }
 
     /**
-     * @inheritDoc
-     */
-    public function keys()
-    {
-        return $this->keys;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function values()
-    {
-        return $this->values;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function items()
-    {
-        return $this->items;
-    }
-
-    /**
      * @param Entry $item
      */
     public function addItem(Entry $item)
@@ -112,6 +88,54 @@ class ArrayOneToMany implements OneToMany
     /*******************************************************************************************************************
      * Start ToFromOneMany
      ******************************************************************************************************************/
+    /**
+     * @inheritDoc
+     */
+    public function keys()
+    {
+        return $this->keys;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function values()
+    {
+        return $this->values;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function items()
+    {
+        return $this->items;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function containsValue($value)
+    {
+        return $this->offsetOfValue($value) !== false;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function containsKey($key)
+    {
+        return count($this->offsetsOfKey($key)) > 0;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function containsEntry($key, $value)
+    {
+        return $this->offsetOfEntry($key, $value) !== false;
+    }
+
     /**
      * @inheritDoc
      */

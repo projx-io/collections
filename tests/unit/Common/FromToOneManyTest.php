@@ -14,6 +14,48 @@ class FromToOneManyTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
+    public function testContainsKey(FromToOneMany $collection, $v, $ks, $k, $vs)
+    {
+        $actual = $collection->containsKey($k[0]);
+        $this->assertTrue($actual);
+    }
+
+    /**
+     * @dataProvider collectionProviderTest
+     * @param FromToOneMany $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
+     */
+    public function testContainsValue(FromToOneMany $collection, $v, $ks, $k, $vs)
+    {
+        $actual = $collection->containsValue($v[0]);
+        $this->assertTrue($actual);
+    }
+
+    /**
+     * @dataProvider collectionProviderTest
+     * @param FromToOneMany $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
+     */
+    public function testContainsEntry(FromToOneMany $collection, $v, $ks, $k, $vs)
+    {
+        $actual = $collection->containsEntry($k[0], $v[0]);
+        $this->assertTrue($actual);
+    }
+
+    /**
+     * @dataProvider collectionProviderTest
+     * @param FromToOneMany $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
+     */
     public function testKeys(FromToOneMany $collection, $v, $ks, $k, $vs)
     {
         $expect = $k;

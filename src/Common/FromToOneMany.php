@@ -20,6 +20,25 @@ interface FromToOneMany
     public function items();
 
     /**
+     * @param mixed $value
+     * @return bool
+     */
+    public function containsValue($value);
+
+    /**
+     * @param mixed $key
+     * @return bool
+     */
+    public function containsKey($key);
+
+    /**
+     * @param mixed $key
+     * @param mixed $value
+     * @return bool
+     */
+    public function containsEntry($key, $value);
+
+    /**
      * @param int $offset
      * @return mixed
      */

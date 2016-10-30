@@ -42,30 +42,6 @@ class ArrayOneToOne implements OneToOne
     }
 
     /**
-     * @inheritDoc
-     */
-    public function keys()
-    {
-        return $this->keys;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function values()
-    {
-        return $this->values;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function items()
-    {
-        return $this->items;
-    }
-
-    /**
      * @param $offset
      */
     public function removeOffset($offset)
@@ -114,10 +90,57 @@ class ArrayOneToOne implements OneToOne
     {
         array_map([$this, 'addItem'], $items);
     }
-
     /*******************************************************************************************************************
      * Start ToFromOneMany
      ******************************************************************************************************************/
+    /**
+     * @inheritDoc
+     */
+    public function keys()
+    {
+        return $this->keys;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function values()
+    {
+        return $this->values;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function items()
+    {
+        return $this->items;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function containsValue($value)
+    {
+        return $this->offsetOfValue($value) !== false;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function containsKey($key)
+    {
+        return $this->offsetOfKey($key) !== false;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function containsEntry($key, $value)
+    {
+        return $this->offsetOfEntry($key, $value) !== false;
+    }
+
     /**
      * @inheritDoc
      */
