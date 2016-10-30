@@ -3,9 +3,10 @@
 namespace ProjxIO\Collections;
 
 use ProjxIO\Collections\Common\Entry;
+use ProjxIO\Collections\Common\MutableFromToOne;
 use ProjxIO\Collections\Common\OneToMany;
 
-class ArrayOneToMany implements OneToMany
+class ArrayOneToMany implements OneToMany, MutableFromToOne
 {
     /**
      * @var array
@@ -55,6 +56,10 @@ class ArrayOneToMany implements OneToMany
      */
     public function addEntry($key, $value)
     {
+        if ($this->containsValue($value)) {
+            $this->removeValue($value);
+        }
+
         $keyOffset = array_search($key, $this->keys, true);
         $valueOffset = array_search($value, $this->values, true);
 
@@ -67,14 +72,15 @@ class ArrayOneToMany implements OneToMany
         if ($valueOffset === false) {
             $valueOffset = count($this->values);
             $this->values[$valueOffset] = $value;
-            $this->valuesItem[$valueOffset] = [];
+        } else {
+            $this->removeValue($value);
         }
 
         $item = new EntryItem($key, $value);
 
         $this->items[] = &$item;
         $this->keysItems[$keyOffset][] = &$item;
-        $this->valuesItem[$valueOffset][] = &$item;
+        $this->valuesItem[$valueOffset] = &$item;
     }
 
     /**
@@ -351,5 +357,124 @@ class ArrayOneToMany implements OneToMany
     }
     /*******************************************************************************************************************
      * End FromToOne
+     ******************************************************************************************************************/
+
+    /*******************************************************************************************************************
+     * Start MutableFromToOne
+     ******************************************************************************************************************/
+    /**
+     * @inheritDoc
+     */
+    public function putEntry($key, $value)
+    {
+        $this->addEntry($key, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function putItem(Entry $item)
+    {
+        $this->putEntry($item->key(), $item->value());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function putItems($items)
+    {
+        array_map([$this, 'putItem'], $items);
+    }
+
+    /**
+     * @param $offset
+     */
+    public function removeOffset($offset)
+    {
+        $this->removeItem($this->itemOfOffset($offset));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function removeOffsets($offsets)
+    {
+        $this->removeItems($this->itemOfOffsets($offsets));
+    }
+
+    /**
+     * @param mixed $value
+     */
+    public function removeValue($value)
+    {
+        $this->removeItem($this->itemOfValue($value));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function removeValues($values)
+    {
+        array_map([$this, 'removeValue'], $values);
+    }
+
+    /**
+     * @param mixed $key
+     */
+    public function removeKey($key)
+    {
+        $this->removeItems($this->itemsOfKey($key));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function removeKeys($keys)
+    {
+        array_map([$this, 'removeKey'], $keys);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function removeItem(Entry $item)
+    {
+        $this->removeEntry($item->key(), $item->value());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function removeItems($items)
+    {
+        array_map([$this, 'removeItem'], $items);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function removeEntry($key, $value)
+    {
+        if (!$this->containsEntry($key, $value)) {
+            return;
+        }
+
+        $keyOffset = array_search($key, $this->keys, true);
+        $valueOffset = array_search($value, $this->values, true);
+        $item = $this->items[$valueOffset];
+        $itemOffset = array_search($item, $this->items, true);
+        $keyItemOffset = array_search($item, $this->keysItems, true);
+
+        array_splice($this->values, $valueOffset, 1);
+        array_splice($this->items, $itemOffset, 1);
+        array_splice($this->keysItems[$keyOffset], $keyItemOffset, 1);
+
+        if (empty($this->keysItems[$keyOffset])) {
+            array_splice($this->keysItems, $keyOffset, 1);
+            array_splice($this->keys, $keyOffset, 1);
+        }
+    }
+    /*******************************************************************************************************************
+     * End MutableFromToOne
      ******************************************************************************************************************/
 }
