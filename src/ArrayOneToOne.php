@@ -3,9 +3,10 @@
 namespace ProjxIO\Collections;
 
 use ProjxIO\Collections\Common\Entry;
+use ProjxIO\Collections\Common\MutableFromToOne;
 use ProjxIO\Collections\Common\OneToOne;
 
-class ArrayOneToOne implements OneToOne
+class ArrayOneToOne implements OneToOne, MutableFromToOne
 {
     /**
      * @var array
@@ -23,30 +24,12 @@ class ArrayOneToOne implements OneToOne
     private $items = [];
 
     /**
-     * @var Entry[]
-     */
-    private $keysItem = [];
-
-    /**
-     * @var Entry[][]
-     */
-    private $valuesItem = [];
-
-    /**
      *
      * @param Entry[] $items
      */
     public function __construct($items = [])
     {
         $this->addItems($items);
-    }
-
-    /**
-     * @param $offset
-     */
-    public function removeOffset($offset)
-    {
-
     }
 
     /**
@@ -63,24 +46,19 @@ class ArrayOneToOne implements OneToOne
      */
     public function addEntry($key, $value)
     {
-        $keyOffset = array_search($key, $this->keys, true);
-        $valueOffset = array_search($value, $this->values, true);
-
-        if ($keyOffset === false) {
-            $keyOffset = count($this->keys);
-            $this->keys[$keyOffset] = $key;
+        if ($this->containsEntry($key, $value)) {
+            return;
         }
 
-        if ($valueOffset === false) {
-            $valueOffset = count($this->values);
-            $this->values[$valueOffset] = $value;
-        }
+        $this->removeKey($key);
+        $this->removeValue($value);
+
+        $offset = count($this->keys);
 
         $item = new EntryItem($key, $value);
-
-        $this->items[] = &$item;
-        $this->keysItem[$keyOffset] = &$item;
-        $this->valuesItem[$valueOffset] = &$item;
+        $this->keys[$offset] = $key;
+        $this->values[$offset] = $value;
+        $this->items[$offset] = &$item;
     }
 
     /**
@@ -90,6 +68,7 @@ class ArrayOneToOne implements OneToOne
     {
         array_map([$this, 'addItem'], $items);
     }
+
     /*******************************************************************************************************************
      * Start ToFromOneMany
      ******************************************************************************************************************/
@@ -200,11 +179,7 @@ class ArrayOneToOne implements OneToOne
      */
     public function offsetOfValue($value)
     {
-        $valueOffset = array_search($value, $this->values, true);
-        if ($valueOffset === false) {
-            return false;
-        }
-        return array_search($this->valuesItem[$valueOffset], $this->items, true);
+        return array_search($value, $this->values, true);
     }
 
     /**
@@ -236,8 +211,7 @@ class ArrayOneToOne implements OneToOne
      */
     public function itemOfValue($value)
     {
-        $values = array_search($value, $this->values, true);
-        return $values === false ? null : $this->valuesItem[$values];
+        return $this->itemOfOffset($this->offsetOfValue($value));
     }
 
     /**
@@ -259,11 +233,7 @@ class ArrayOneToOne implements OneToOne
      */
     public function offsetOfKey($key)
     {
-        $keyOffset = array_search($key, $this->keys, true);
-        if ($keyOffset === false) {
-            return false;
-        }
-        return array_search($this->keysItem[$keyOffset], $this->items, true);
+        return array_search($key, $this->keys, true);
     }
 
     /**
@@ -338,5 +308,92 @@ class ArrayOneToOne implements OneToOne
     }
     /*******************************************************************************************************************
      * End FromToOne
+     ******************************************************************************************************************/
+
+    /*******************************************************************************************************************
+     * End MutableFromToOne
+     ******************************************************************************************************************/
+    /**
+     * @param $offset
+     */
+    public function removeOffset($offset)
+    {
+        if ($offset !== false) {
+            array_splice($this->items, $offset, 1);
+            array_splice($this->keys, $offset, 1);
+            array_splice($this->values, $offset, 1);
+
+            $this->items = array_values($this->items);
+            $this->keys = array_values($this->keys);
+            $this->values = array_values($this->values);
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function removeOffsets($offsets)
+    {
+        rsort($offsets);
+        return array_map([$this, 'removeOffset'], $offsets);
+    }
+
+    /**
+     * @param mixed $value
+     */
+    public function removeValue($value)
+    {
+        $this->removeOffset($this->offsetOfValue($value));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function removeValues($values)
+    {
+        return array_map([$this, 'removeValue'], $values);
+    }
+
+    /**
+     * @param mixed $key
+     */
+    public function removeKey($key)
+    {
+        $this->removeOffset($this->offsetOfKey($key));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function removeKeys($keys)
+    {
+        return array_map([$this, 'removeKey'], $keys);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function removeItem($item)
+    {
+
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function removeItems($items)
+    {
+        return array_map([$this, 'removeItem'], $items);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function removeEntry($key, $value)
+    {
+        $this->removeOffset($this->offsetOfEntry($key, $value));
+    }
+    /*******************************************************************************************************************
+     * End MutableFromToOne
      ******************************************************************************************************************/
 }

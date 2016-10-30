@@ -143,13 +143,16 @@ class TestCase extends PHPUnit_Framework_TestCase
 
     public function collectionProvider()
     {
-//        $items = $this->itemsOneToOne();
-//        $oto = new ArrayOneToOne();
-//        $oto->addItems($items);
-//        array_shift($items);
-//        $oto->removeOffset(0);
+        $oto = new ArrayOneToOne($this->itemsOneToOne());
+        $oto->removeOffset(0);
+        $oto->addItems($this->itemsOneToOne());
+        $oto->addItems($this->itemsManyToOne());
+        $oto->addItems($this->itemsOneToMany());
+        $oto->addItems($this->itemsManyToMany());
+        $oto->addItems($this->itemsManyToMany());
 
         return [
+            $this->generateCase($oto),
             $this->generateCase(new ArrayOneToOne($this->itemsOneToOne())),
             $this->generateCase(new ArrayOneToMany($this->itemsOneToMany())),
             $this->generateCase(new ArrayManyToOne($this->itemsManyToOne())),
