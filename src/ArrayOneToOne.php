@@ -375,7 +375,7 @@ class ArrayOneToOne implements OneToOne, MutableFromToOne
      */
     public function removeItem($item)
     {
-
+        return $this->removeEntry($item->key(), $item->value());
     }
 
     /**
