@@ -326,7 +326,7 @@ class ArrayOneToOne implements OneToOne, MutableFromToOne
      */
     public function putItem(Entry $item)
     {
-
+        $this->putEntry($item->key(), $item->value());
     }
 
     /**
