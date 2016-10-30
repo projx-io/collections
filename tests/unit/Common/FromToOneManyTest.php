@@ -2,6 +2,7 @@
 
 namespace ProjxIO\Collections\Common;
 
+use ProjxIO\Collections\EntryItem;
 use ProjxIO\Collections\TestCase;
 
 class FromToOneManyTest extends TestCase
@@ -45,6 +46,39 @@ class FromToOneManyTest extends TestCase
     public function testContainsEntry(FromToOneMany $collection, $v, $ks, $k, $vs)
     {
         $actual = $collection->containsEntry($k[0], $v[0]);
+        $this->assertTrue($actual);
+    }
+
+    /**
+     * @dataProvider collectionProviderTest
+     * @param FromToOneMany $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
+     */
+    public function testContainsItem(FromToOneMany $collection, $v, $ks, $k, $vs)
+    {
+        $item = new EntryItem($k[0], $v[0]);
+        $actual = $collection->containsItem($item);
+        $this->assertTrue($actual);
+    }
+
+    /**
+     * @dataProvider collectionProviderTest
+     * @param FromToOneMany $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
+     */
+    public function testContainsItems(FromToOneMany $collection, $v, $ks, $k, $vs, $i)
+    {
+        $items = [
+            new EntryItem($k[0], $v[0]),
+            new EntryItem($k[2], $v[2]),
+        ];
+        $actual = $collection->containsItems($items);
         $this->assertTrue($actual);
     }
 

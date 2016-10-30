@@ -139,6 +139,28 @@ class ArrayManyToMany implements ManyToMany
     /**
      * @inheritDoc
      */
+    public function containsItem(Entry $item)
+    {
+        return $this->containsEntry($item->key(), $item->value());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function containsItems($items)
+    {
+        foreach ($items as $item) {
+            if (!$this->containsItem($item)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function valueOfOffset($offset)
     {
         return $this->itemOfOffset($offset)->value();

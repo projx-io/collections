@@ -39,6 +39,18 @@ interface FromToOneMany
     public function containsEntry($key, $value);
 
     /**
+     * @param Entry $item
+     * @return bool
+     */
+    public function containsItem(Entry $item);
+
+    /**
+     * @param Entry[] $items
+     * @return bool
+     */
+    public function containsItems($items);
+
+    /**
      * @param int $offset
      * @return mixed
      */
