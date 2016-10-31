@@ -6,11 +6,11 @@ class ArrayManyToManyTest extends TestCase
 {
     public function testConstructorEmpty()
     {
-        new ArrayManyToMany([]);
+        $this->assertInstanceOf(ArrayManyToMany::class, new ArrayManyToMany([]));
     }
 
     public function testConstructor()
     {
-        new ArrayManyToMany([new EntryItem('A', 'X')]);
+        $this->assertInstanceOf(ArrayManyToMany::class, new ArrayManyToMany([new EntryItem('A', 'X')]));
     }
 }

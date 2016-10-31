@@ -6,11 +6,11 @@ class ArrayListTest extends TestCase
 {
     public function testConstructorEmpty()
     {
-        new ArrayList([]);
+        $this->assertInstanceOf(ArrayList::class, new ArrayList([]));
     }
 
     public function testConstructor()
     {
-        new ArrayList(['a']);
+        $this->assertInstanceOf(ArrayList::class, new ArrayList(['a']));
     }
 }

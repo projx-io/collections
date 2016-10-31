@@ -6,11 +6,11 @@ class ArrayOneToOneTest extends TestCase
 {
     public function testConstructorEmpty()
     {
-        new ArrayOneToOne([]);
+        $this->assertInstanceOf(ArrayOneToOne::class, new ArrayOneToOne([]));
     }
 
     public function testConstructor()
     {
-        new ArrayOneToOne([new EntryItem('A', 'X')]);
+        $this->assertInstanceOf(ArrayOneToOne::class, new ArrayOneToOne([new EntryItem('A', 'X')]));
     }
 }
