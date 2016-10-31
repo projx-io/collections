@@ -33,7 +33,8 @@ class ValueStream implements Stream
      */
     public function each(callable $callback)
     {
-
+        array_map($callback, $this->values);
+        return $this;
     }
 
     /**
@@ -41,7 +42,8 @@ class ValueStream implements Stream
      */
     public function map(callable $callback)
     {
-
+        array_map($callback, $this->values);
+        return $this;
     }
 
     /**
@@ -57,7 +59,7 @@ class ValueStream implements Stream
      */
     public function toSet()
     {
-
+        return new ArraySet($this->values);
     }
 
     /**
@@ -65,7 +67,7 @@ class ValueStream implements Stream
      */
     public function toList()
     {
-
+        return new ArrayList($this->values);
     }
 
     /**
@@ -73,7 +75,7 @@ class ValueStream implements Stream
      */
     public function toOneToOne()
     {
-
+        return new ArrayOneToOne($this->values);
     }
 
     /**
@@ -81,7 +83,7 @@ class ValueStream implements Stream
      */
     public function toOneToMany()
     {
-
+        return new ArrayOneToMany($this->values);
     }
 
     /**
@@ -89,7 +91,7 @@ class ValueStream implements Stream
      */
     public function toManyToOne()
     {
-
+        return new ArrayManyToOne($this->values);
     }
 
     /**
@@ -97,6 +99,6 @@ class ValueStream implements Stream
      */
     public function toManyToMany()
     {
-
+        return new ArrayManyToMany($this->values);
     }
 }

@@ -34,7 +34,8 @@ class ItemStream implements Stream
      */
     public function each(callable $callback)
     {
-
+        array_map($callback, $this->items);
+        return $this;
     }
 
     /**
@@ -42,7 +43,8 @@ class ItemStream implements Stream
      */
     public function map(callable $callback)
     {
-
+        array_map($callback, $this->items);
+        return $this;
     }
 
     /**
@@ -58,7 +60,7 @@ class ItemStream implements Stream
      */
     public function toSet()
     {
-
+        return new ArraySet($this->items);
     }
 
     /**
@@ -66,7 +68,7 @@ class ItemStream implements Stream
      */
     public function toList()
     {
-
+        return new ArrayList($this->items);
     }
 
     /**
