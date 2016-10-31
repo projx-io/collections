@@ -4,7 +4,7 @@ namespace ProjxIO\Collections\Common;
 
 use IteratorAggregate;
 
-interface Iterable extends IteratorAggregate
+interface Streamable extends IteratorAggregate
 {
     /**
      * @return Stream

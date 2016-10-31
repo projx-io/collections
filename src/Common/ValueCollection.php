@@ -2,7 +2,7 @@
 
 namespace ProjxIO\Collections\Common;
 
-interface ValueCollection extends Iterable
+interface ValueCollection extends Streamable
 {
     /**
      * @param mixed $value
