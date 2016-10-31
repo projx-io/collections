@@ -2,7 +2,7 @@
 
 namespace ProjxIO\Collections\Common;
 
-interface ItemCollection
+interface ItemCollection extends ValueCollection
 {
     /**
      * @return mixed[]
@@ -18,12 +18,6 @@ interface ItemCollection
      * @return Entry[]
      */
     public function items();
-
-    /**
-     * @param mixed $value
-     * @return bool
-     */
-    public function containsValue($value);
 
     /**
      * @param mixed $key
@@ -49,18 +43,6 @@ interface ItemCollection
      * @return bool
      */
     public function containsItems($items);
-
-    /**
-     * @param int $offset
-     * @return mixed
-     */
-    public function valueOfOffset($offset);
-
-    /**
-     * @param int[] $offsets
-     * @return mixed[]
-     */
-    public function valueOfOffsets($offsets);
 
     /**
      * @param int $offset
