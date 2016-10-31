@@ -5,8 +5,6 @@ namespace ProjxIO\Collections;
 use ArrayIterator;
 use ProjxIO\Collections\Common\ArrayCollection;
 use ProjxIO\Collections\Common\MutableValueList;
-use ProjxIO\Collections\Common\Stream;
-use Traversable;
 
 class ArrayList implements MutableValueList, ArrayCollection
 {

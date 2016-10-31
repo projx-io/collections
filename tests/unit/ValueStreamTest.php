@@ -102,6 +102,7 @@ class ValueStreamTest extends TestCase
         })->toList()->toArray();
         $this->assertEquals($expect, $actual);
     }
+
     public function testGetIterator()
     {
         $values = ['a', 'b', 'c'];
