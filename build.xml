@@ -241,16 +241,16 @@
             <arg value="${outdir}/coverage/clover.xml"/>
             <arg value="--coverage-crap4j"/>
             <arg value="${outdir}/coverage/crap4j.xml"/>
-            <arg value="--coverage-text=${outdir}/coverage/coverage.txt"/>
+            <!--<arg value="&#45;&#45;coverage-text=${outdir}/coverage/coverage.txt"/>-->
             <arg value="--log-junit"/>
             <arg value="${outdir}/logs/junit.xml"/>
             <arg value="--log-json"/>
             <arg value="${outdir}/logs.json"/>
         </exec>
 
-        <loadfile property="coverage.txt" srcFile="${outdir}/coverage/coverage.txt"/>
+        <!--<loadfile property="coverage.txt" srcFile="${outdir}/coverage/coverage.txt"/>-->
 
-        <echo taskname="phpunit">${coverage.txt}</echo>
+        <!--<echo taskname="phpunit">${coverage.txt}</echo>-->
 
         <property name="phpunit.done" value="true"/>
     </target>
