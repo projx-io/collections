@@ -61,22 +61,18 @@ class ArrayOneToMany implements OneToMany, MutableFromToOne
         }
 
         $keyOffset = array_search($key, $this->keys, true);
-        $valueOffset = array_search($value, $this->values, true);
+        $valueOffset = count($this->values);
 
         if ($keyOffset === false) {
             $keyOffset = count($this->keys);
-            $this->keys[$keyOffset] = $key;
             $this->keysItems[$keyOffset] = [];
-        }
-
-        if ($valueOffset === false) {
-            $valueOffset = count($this->values);
-            $this->values[$valueOffset] = $value;
         }
 
         $item = new EntryItem($key, $value);
 
         $this->items[] = &$item;
+        $this->keys[$keyOffset] = $key;
+        $this->values[$valueOffset] = $value;
         $this->keysItems[$keyOffset][] = &$item;
         $this->valuesItem[$valueOffset] = &$item;
     }

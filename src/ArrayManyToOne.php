@@ -60,23 +60,19 @@ class ArrayManyToOne implements ManyToOne, MutableFromToOne
             $this->removeKey($key);
         }
 
-        $keyOffset = array_search($key, $this->keys, true);
+        $keyOffset = count($this->keys);
         $valueOffset = array_search($value, $this->values, true);
-
-        if ($keyOffset === false) {
-            $keyOffset = count($this->keys);
-            $this->keys[$keyOffset] = $key;
-        }
 
         if ($valueOffset === false) {
             $valueOffset = count($this->values);
-            $this->values[$valueOffset] = $value;
             $this->valuesItems[$valueOffset] = [];
         }
 
         $item = new EntryItem($key, $value);
 
         $this->items[] = &$item;
+        $this->keys[$keyOffset] = $key;
+        $this->values[$valueOffset] = $value;
         $this->keysItem[$keyOffset] = &$item;
         $this->valuesItems[$valueOffset][] = &$item;
     }
