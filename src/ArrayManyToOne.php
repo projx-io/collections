@@ -4,9 +4,9 @@ namespace ProjxIO\Collections;
 
 use ProjxIO\Collections\Common\Entry;
 use ProjxIO\Collections\Common\ManyToOne;
-use ProjxIO\Collections\Common\MutableFromToOne;
+use ProjxIO\Collections\Common\MutableItemSet;
 
-class ArrayManyToOne implements ManyToOne, MutableFromToOne
+class ArrayManyToOne implements ManyToOne, MutableItemSet
 {
     /**
      * @var array

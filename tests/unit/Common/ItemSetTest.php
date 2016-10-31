@@ -5,17 +5,17 @@ namespace ProjxIO\Collections\Common;
 use ProjxIO\Collections\EntryItem;
 use ProjxIO\Collections\TestCase;
 
-class FromToOneTest extends TestCase
+class ItemSetTest extends TestCase
 {
     /**
      * @dataProvider collectionProviderTest
-     * @param FromToOne $collection
+     * @param ItemSet $collection
      * @param mixed[] $v
      * @param mixed[][] $ks
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testOffsetOfEntry(FromToOne $collection, $v, $ks, $k, $vs)
+    public function testOffsetOfEntry(ItemSet $collection, $v, $ks, $k, $vs)
     {
         $expect = array_keys($ks[$v[0]])[0];
         $actual = $collection->offsetOfEntry($k[0], $v[0]);
@@ -24,13 +24,13 @@ class FromToOneTest extends TestCase
 
     /**
      * @dataProvider collectionProviderTest
-     * @param FromToOne $collection
+     * @param ItemSet $collection
      * @param mixed[] $v
      * @param mixed[][] $ks
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testOffsetOfItem(FromToOne $collection, $v, $ks, $k, $vs)
+    public function testOffsetOfItem(ItemSet $collection, $v, $ks, $k, $vs)
     {
         $item = new EntryItem($k[0], $v[0]);
         $expect = array_keys($ks[$v[0]])[0];
@@ -40,13 +40,13 @@ class FromToOneTest extends TestCase
 
     /**
      * @dataProvider collectionProviderTest
-     * @param FromToOne $collection
+     * @param ItemSet $collection
      * @param mixed[] $v
      * @param mixed[][] $ks
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testOffsetOfItems(FromToOne $collection, $v, $ks, $k, $vs)
+    public function testOffsetOfItems(ItemSet $collection, $v, $ks, $k, $vs)
     {
         $items = [
             new EntryItem($k[0], $v[0]),

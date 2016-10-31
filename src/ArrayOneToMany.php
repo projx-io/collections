@@ -3,10 +3,10 @@
 namespace ProjxIO\Collections;
 
 use ProjxIO\Collections\Common\Entry;
-use ProjxIO\Collections\Common\MutableFromToOne;
+use ProjxIO\Collections\Common\MutableItemSet;
 use ProjxIO\Collections\Common\OneToMany;
 
-class ArrayOneToMany implements OneToMany, MutableFromToOne
+class ArrayOneToMany implements OneToMany, MutableItemSet
 {
     /**
      * @var array

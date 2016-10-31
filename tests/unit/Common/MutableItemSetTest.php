@@ -5,17 +5,17 @@ namespace ProjxIO\Collections\Common;
 use ProjxIO\Collections\EntryItem;
 use ProjxIO\Collections\TestCase;
 
-class MutableFromToOneTest extends TestCase
+class MutableItemSetTest extends TestCase
 {
     /**
      * @dataProvider collectionProviderTest
-     * @param MutableFromToOne $collection
+     * @param MutableItemSet $collection
      * @param mixed[] $v
      * @param mixed[][] $ks
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testPutEntry(MutableFromToOne $collection, $v, $ks, $k, $vs)
+    public function testPutEntry(MutableItemSet $collection, $v, $ks, $k, $vs)
     {
         $key = 'MM';
         $value = 'NN';
@@ -26,13 +26,13 @@ class MutableFromToOneTest extends TestCase
 
     /**
      * @dataProvider collectionProviderTest
-     * @param MutableFromToOne $collection
+     * @param MutableItemSet $collection
      * @param mixed[] $v
      * @param mixed[][] $ks
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testPutItem(MutableFromToOne $collection, $v, $ks, $k, $vs)
+    public function testPutItem(MutableItemSet $collection, $v, $ks, $k, $vs)
     {
         $key = 'MM';
         $value = 'NN';
@@ -44,13 +44,13 @@ class MutableFromToOneTest extends TestCase
 
     /**
      * @dataProvider collectionProviderTest
-     * @param MutableFromToOne $collection
+     * @param MutableItemSet $collection
      * @param mixed[] $v
      * @param mixed[][] $ks
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testPutItems(MutableFromToOne $collection, $v, $ks, $k, $vs)
+    public function testPutItems(MutableItemSet $collection, $v, $ks, $k, $vs)
     {
         $items = [
             new EntryItem('MM', 'NN'),
@@ -63,13 +63,13 @@ class MutableFromToOneTest extends TestCase
 
     /**
      * @dataProvider collectionProviderTest
-     * @param MutableFromToOne $collection
+     * @param MutableItemSet $collection
      * @param mixed[] $v
      * @param mixed[][] $ks
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testRestrictions(MutableFromToOne $collection, $v, $ks, $k, $vs)
+    public function testRestrictions(MutableItemSet $collection, $v, $ks, $k, $vs)
     {
         $a = new EntryItem('MM', 'NN');
         $b = new EntryItem('OO', 'PP');
@@ -83,13 +83,13 @@ class MutableFromToOneTest extends TestCase
 
     /**
      * @dataProvider collectionProviderTest
-     * @param MutableFromToOne $collection
+     * @param MutableItemSet $collection
      * @param mixed[] $v
      * @param mixed[][] $ks
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testRemoveOffset(MutableFromToOne $collection, $v, $ks, $k, $vs)
+    public function testRemoveOffset(MutableItemSet $collection, $v, $ks, $k, $vs)
     {
         $this->assertTrue($collection->containsEntry($k[0], $v[0]));
         $collection->removeOffset(0);
@@ -98,13 +98,13 @@ class MutableFromToOneTest extends TestCase
 
     /**
      * @dataProvider collectionProviderTest
-     * @param MutableFromToOne $collection
+     * @param MutableItemSet $collection
      * @param mixed[] $v
      * @param mixed[][] $ks
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testRemoveOffsets(MutableFromToOne $collection, $v, $ks, $k, $vs)
+    public function testRemoveOffsets(MutableItemSet $collection, $v, $ks, $k, $vs)
     {
         $this->assertTrue($collection->containsEntry($k[0], $v[0]));
         $this->assertTrue($collection->containsEntry($k[2], $v[2]));
@@ -115,13 +115,13 @@ class MutableFromToOneTest extends TestCase
 
     /**
      * @dataProvider collectionProviderTest
-     * @param MutableFromToOne $collection
+     * @param MutableItemSet $collection
      * @param mixed[] $v
      * @param mixed[][] $ks
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testRemoveEntry(MutableFromToOne $collection, $v, $ks, $k, $vs)
+    public function testRemoveEntry(MutableItemSet $collection, $v, $ks, $k, $vs)
     {
         $this->assertTrue($collection->containsEntry($k[0], $v[0]));
         $collection->removeEntry($k[0], $v[0]);
@@ -130,13 +130,13 @@ class MutableFromToOneTest extends TestCase
 
     /**
      * @dataProvider collectionProviderTest
-     * @param MutableFromToOne $collection
+     * @param MutableItemSet $collection
      * @param mixed[] $v
      * @param mixed[][] $ks
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testRemoveItem(MutableFromToOne $collection, $v, $ks, $k, $vs)
+    public function testRemoveItem(MutableItemSet $collection, $v, $ks, $k, $vs)
     {
         $this->assertTrue($collection->containsEntry($k[0], $v[0]));
         $collection->removeItem(new EntryItem($k[0], $v[0]));
@@ -145,13 +145,13 @@ class MutableFromToOneTest extends TestCase
 
     /**
      * @dataProvider collectionProviderTest
-     * @param MutableFromToOne $collection
+     * @param MutableItemSet $collection
      * @param mixed[] $v
      * @param mixed[][] $ks
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testRemoveItems(MutableFromToOne $collection, $v, $ks, $k, $vs)
+    public function testRemoveItems(MutableItemSet $collection, $v, $ks, $k, $vs)
     {
         $this->assertTrue($collection->containsEntry($k[0], $v[0]));
         $this->assertTrue($collection->containsEntry($k[2], $v[2]));
@@ -165,13 +165,13 @@ class MutableFromToOneTest extends TestCase
 
     /**
      * @dataProvider collectionProviderTest
-     * @param MutableFromToOne $collection
+     * @param MutableItemSet $collection
      * @param mixed[] $v
      * @param mixed[][] $ks
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testRemoveValue(MutableFromToOne $collection, $v, $ks, $k, $vs)
+    public function testRemoveValue(MutableItemSet $collection, $v, $ks, $k, $vs)
     {
         $this->assertTrue($collection->containsValue($v[0]));
         $collection->removeValue($v[0]);
@@ -180,13 +180,13 @@ class MutableFromToOneTest extends TestCase
 
     /**
      * @dataProvider collectionProviderTest
-     * @param MutableFromToOne $collection
+     * @param MutableItemSet $collection
      * @param mixed[] $v
      * @param mixed[][] $ks
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testRemoveValues(MutableFromToOne $collection, $v, $ks, $k, $vs)
+    public function testRemoveValues(MutableItemSet $collection, $v, $ks, $k, $vs)
     {
         $this->assertTrue($collection->containsValue($v[0]));
         $this->assertTrue($collection->containsValue($v[2]));
@@ -197,13 +197,13 @@ class MutableFromToOneTest extends TestCase
 
     /**
      * @dataProvider collectionProviderTest
-     * @param MutableFromToOne $collection
+     * @param MutableItemSet $collection
      * @param mixed[] $v
      * @param mixed[][] $ks
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testRemoveKey(MutableFromToOne $collection, $v, $ks, $k, $vs)
+    public function testRemoveKey(MutableItemSet $collection, $v, $ks, $k, $vs)
     {
         $this->assertTrue($collection->containsKey($k[0]));
         $collection->removeKey($k[0]);
@@ -212,13 +212,13 @@ class MutableFromToOneTest extends TestCase
 
     /**
      * @dataProvider collectionProviderTest
-     * @param MutableFromToOne $collection
+     * @param MutableItemSet $collection
      * @param mixed[] $v
      * @param mixed[][] $ks
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testRemoveKeys(MutableFromToOne $collection, $v, $ks, $k, $vs)
+    public function testRemoveKeys(MutableItemSet $collection, $v, $ks, $k, $vs)
     {
         $this->assertTrue($collection->containsKey($k[0]));
         $this->assertTrue($collection->containsKey($k[2]));
@@ -229,13 +229,13 @@ class MutableFromToOneTest extends TestCase
 
     /**
      * @dataProvider collectionProviderTest
-     * @param MutableFromToOne $collection
+     * @param MutableItemSet $collection
      * @param mixed[] $v
      * @param mixed[][] $ks
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testRemoveNonexistentEntry(MutableFromToOne $collection, $v, $ks, $k, $vs)
+    public function testRemoveNonexistentEntry(MutableItemSet $collection, $v, $ks, $k, $vs)
     {
         $collection->removeEntry('AA', 'ZZ');
         $expect = count($collection->items());
@@ -245,13 +245,13 @@ class MutableFromToOneTest extends TestCase
 
     /**
      * @dataProvider collectionProviderTest
-     * @param MutableFromToOne $collection
+     * @param MutableItemSet $collection
      * @param mixed[] $v
      * @param mixed[][] $ks
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testAddDuplicate(MutableFromToOne $collection, $v, $ks, $k, $vs)
+    public function testAddDuplicate(MutableItemSet $collection, $v, $ks, $k, $vs)
     {
         $collection->putEntry('AA', 'ZZ');
         $expect = count($collection->items());

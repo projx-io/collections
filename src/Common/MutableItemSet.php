@@ -2,7 +2,7 @@
 
 namespace ProjxIO\Collections\Common;
 
-interface MutableFromToOne extends FromToOne
+interface MutableItemSet extends ItemSet
 {
     /**
      * @param mixed $key

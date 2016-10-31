@@ -2,7 +2,7 @@
 
 namespace ProjxIO\Collections\Common;
 
-interface FromToOne extends FromToOneMany
+interface ItemSet extends FromToOneMany
 {
     /**
      * @param mixed $key
