@@ -26,7 +26,7 @@ class ItemStream implements Stream
      */
     public function getIterator()
     {
-
+        return new ItemIterator($this->items);
     }
 
     /**
@@ -43,8 +43,7 @@ class ItemStream implements Stream
      */
     public function map(callable $callback)
     {
-        array_map($callback, $this->items);
-        return $this;
+        return new ItemStream(array_map($callback, $this->items));
     }
 
     /**
@@ -52,7 +51,7 @@ class ItemStream implements Stream
      */
     public function filter(callable $callback)
     {
-
+        return new ItemStream(array_filter($this->items, $callback));
     }
 
     /**
@@ -76,7 +75,7 @@ class ItemStream implements Stream
      */
     public function toOneToOne()
     {
-
+        return new ArrayOneToOne($this->items);
     }
 
     /**
@@ -84,7 +83,7 @@ class ItemStream implements Stream
      */
     public function toOneToMany()
     {
-
+        return new ArrayOneToMany($this->items);
     }
 
     /**
@@ -92,7 +91,7 @@ class ItemStream implements Stream
      */
     public function toManyToOne()
     {
-
+        return new ArrayManyToOne($this->items);
     }
 
     /**
@@ -100,6 +99,6 @@ class ItemStream implements Stream
      */
     public function toManyToMany()
     {
-
+        return new ArrayManyToMany($this->items);
     }
 }

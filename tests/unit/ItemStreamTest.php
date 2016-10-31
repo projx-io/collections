@@ -9,13 +9,13 @@ use ProjxIO\Collections\Common\OneToOne;
 use ProjxIO\Collections\Common\ValueList;
 use ProjxIO\Collections\Common\ValueSet;
 
-class ValueStreamTest extends TestCase
+class ItemStreamTest extends TestCase
 {
     public function testToList()
     {
-        $values = ['a', 'b', 'c'];
+        $values = [new EntryItem('A', 'a'), new EntryItem('B', 'b'), new EntryItem('C', 'c')];
         $expect = ValueList::class;
-        $stream = new ValueStream($values);
+        $stream = new ItemStream($values);
         $collection = $stream->toList();
         $this->assertInstanceOf($expect, $collection);
         $this->assertEquals($values, $collection->valueOfOffsets([0, 1, 2]));
@@ -23,9 +23,9 @@ class ValueStreamTest extends TestCase
 
     public function testToSet()
     {
-        $values = ['a', 'b', 'c'];
+        $values = [new EntryItem('A', 'a'), new EntryItem('B', 'b'), new EntryItem('C', 'c')];
         $expect = ValueSet::class;
-        $stream = new ValueStream($values);
+        $stream = new ItemStream($values);
         $collection = $stream->toSet();
         $this->assertInstanceOf($expect, $collection);
         $this->assertEquals($values, $collection->valueOfOffsets([0, 1, 2]));
@@ -36,7 +36,7 @@ class ValueStreamTest extends TestCase
         $items = [new EntryItem('A', 'a'), new EntryItem('B', 'b'), new EntryItem('C', 'c')];
         $values = ['a', 'b', 'c'];
         $expect = OneToOne::class;
-        $stream = new ValueStream($items);
+        $stream = new ItemStream($items);
         $collection = $stream->toOneToOne();
         $this->assertInstanceOf($expect, $collection);
         $this->assertEquals($values, $collection->valueOfOffsets([0, 1, 2]));
@@ -47,7 +47,7 @@ class ValueStreamTest extends TestCase
         $items = [new EntryItem('A', 'a'), new EntryItem('B', 'b'), new EntryItem('C', 'c')];
         $values = ['a', 'b', 'c'];
         $expect = OneToMany::class;
-        $stream = new ValueStream($items);
+        $stream = new ItemStream($items);
         $collection = $stream->toOneToMany();
         $this->assertInstanceOf($expect, $collection);
         $this->assertEquals($values, $collection->valueOfOffsets([0, 1, 2]));
@@ -58,7 +58,7 @@ class ValueStreamTest extends TestCase
         $items = [new EntryItem('A', 'a'), new EntryItem('B', 'b'), new EntryItem('C', 'c')];
         $values = ['a', 'b', 'c'];
         $expect = ManyToOne::class;
-        $stream = new ValueStream($items);
+        $stream = new ItemStream($items);
         $collection = $stream->toManyToOne();
         $this->assertInstanceOf($expect, $collection);
         $this->assertEquals($values, $collection->valueOfOffsets([0, 1, 2]));
@@ -69,7 +69,7 @@ class ValueStreamTest extends TestCase
         $items = [new EntryItem('A', 'a'), new EntryItem('B', 'b'), new EntryItem('C', 'c')];
         $values = ['a', 'b', 'c'];
         $expect = ManyToMany::class;
-        $stream = new ValueStream($items);
+        $stream = new ItemStream($items);
         $collection = $stream->toManyToMany();
         $this->assertInstanceOf($expect, $collection);
         $this->assertEquals($values, $collection->valueOfOffsets([0, 1, 2]));
@@ -79,7 +79,7 @@ class ValueStreamTest extends TestCase
     {
         $values = ['a', 'b', 'c'];
         $expect = ['A', 'B', 'C'];
-        $stream = new ValueStream($values);
+        $stream = new ItemStream($values);
         $actual = $stream->map('strtoupper')->toList()->toArray();
         $this->assertEquals($expect, $actual);
     }
@@ -87,7 +87,7 @@ class ValueStreamTest extends TestCase
     public function testEach()
     {
         $values = ['a', 'b', 'c'];
-        $stream = new ValueStream($values);
+        $stream = new ItemStream($values);
         $actual = $stream->each('strtoupper')->toList()->toArray();
         $this->assertEquals($values, $actual);
     }
@@ -96,20 +96,25 @@ class ValueStreamTest extends TestCase
     {
         $values = ['a', 'b', 'c'];
         $expect = ['a', 'c'];
-        $stream = new ValueStream($values);
+        $stream = new ItemStream($values);
         $actual = $stream->filter(function ($value) {
             return ord($value) % 2;
         })->toList()->toArray();
         $this->assertEquals($expect, $actual);
     }
+
     public function testGetIterator()
     {
-        $values = ['a', 'b', 'c'];
-        $stream = new ValueStream($values);
+        $items = [
+            new EntryItem('A', 'a'),
+            new EntryItem('B', 'b'),
+            new EntryItem('C', 'c')
+        ];
+        $stream = new ItemStream($items);
         $i = 0;
         foreach ($stream as $key => $value) {
-            $this->assertEquals($i, $key);
-            $this->assertEquals($values[$i], $value);
+            $this->assertEquals($items[$i]->key(), $key);
+            $this->assertEquals($items[$i]->value(), $value);
             $i++;
         }
     }
