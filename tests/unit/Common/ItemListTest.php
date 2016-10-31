@@ -5,17 +5,17 @@ namespace ProjxIO\Collections\Common;
 use ProjxIO\Collections\EntryItem;
 use ProjxIO\Collections\TestCase;
 
-class ManyToManyTest extends TestCase
+class ItemListTest extends TestCase
 {
     /**
      * @dataProvider collectionProviderTest
-     * @param ManyToMany $collection
+     * @param ItemList $collection
      * @param mixed[] $v
      * @param mixed[][] $ks
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testOffsetsOfEntry(ManyToMany $collection, $v, $ks, $k, $vs)
+    public function testOffsetsOfEntry(ItemList $collection, $v, $ks, $k, $vs)
     {
         $expect = array_intersect(array_keys($ks[$v[0]]), array_keys($vs[$k[0]]));
         $actual = $collection->offsetsOfEntry($k[0], $v[0]);
@@ -24,13 +24,13 @@ class ManyToManyTest extends TestCase
 
     /**
      * @dataProvider collectionProviderTest
-     * @param ManyToMany $collection
+     * @param ItemList $collection
      * @param mixed[] $v
      * @param mixed[][] $ks
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testOffsetsOfItem(ManyToMany $collection, $v, $ks, $k, $vs)
+    public function testOffsetsOfItem(ItemList $collection, $v, $ks, $k, $vs)
     {
         $expect = array_intersect(array_keys($ks[$v[0]]), array_keys($vs[$k[0]]));
         $actual = $collection->offsetsOfItem(new EntryItem($k[0], $v[0]));
@@ -39,13 +39,13 @@ class ManyToManyTest extends TestCase
 
     /**
      * @dataProvider collectionProviderTest
-     * @param ManyToMany $collection
+     * @param ItemList $collection
      * @param mixed[] $v
      * @param mixed[][] $ks
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testOffsetsOfItems(ManyToMany $collection, $v, $ks, $k, $vs)
+    public function testOffsetsOfItems(ItemList $collection, $v, $ks, $k, $vs)
     {
         $expect = [
             array_intersect(array_keys($ks[$v[0]]), array_keys($vs[$k[0]])),
