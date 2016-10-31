@@ -2,6 +2,7 @@
 
 namespace ProjxIO\Collections;
 
+use ArrayIterator;
 use ProjxIO\Collections\Common\ArrayCollection;
 use ProjxIO\Collections\Common\MutableValueSet;
 
@@ -117,5 +118,21 @@ class ArraySet implements MutableValueSet, ArrayCollection
     public function putValues($values)
     {
         array_map([$this, 'putValue'], $values);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getIterator()
+    {
+        return new ArrayIterator($this->values);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function stream()
+    {
+        return new ValueStream($this->values);
     }
 }

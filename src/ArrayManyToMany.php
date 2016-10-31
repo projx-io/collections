@@ -2,6 +2,7 @@
 
 namespace ProjxIO\Collections;
 
+use ArrayIterator;
 use ProjxIO\Collections\Common\Entry;
 use ProjxIO\Collections\Common\ManyToMany;
 
@@ -367,4 +368,30 @@ class ArrayManyToMany implements ManyToMany
     /*******************************************************************************************************************
      * End ToFromMany
      ******************************************************************************************************************/
+
+    /**
+     * @inheritDoc
+     */
+    public function withOffsets()
+    {
+        return array_map(function (Entry $item, $offset) {
+            return new SequentialEntryItem($item->key(), $item->value(), $offset);
+        }, $this->items, array_keys($this->items));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getIterator()
+    {
+        return new ArrayIterator($this->items);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function stream()
+    {
+        return new ValueStream($this->items);
+    }
 }

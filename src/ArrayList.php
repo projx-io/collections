@@ -2,8 +2,11 @@
 
 namespace ProjxIO\Collections;
 
+use ArrayIterator;
 use ProjxIO\Collections\Common\ArrayCollection;
 use ProjxIO\Collections\Common\MutableValueList;
+use ProjxIO\Collections\Common\Stream;
+use Traversable;
 
 class ArrayList implements MutableValueList, ArrayCollection
 {
@@ -123,5 +126,21 @@ class ArrayList implements MutableValueList, ArrayCollection
     public function addValues($values)
     {
         array_map([$this, 'addValue'], $values);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getIterator()
+    {
+        return new ArrayIterator($this->values);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function stream()
+    {
+        return new ValueStream($this->values);
     }
 }
