@@ -62,7 +62,8 @@ class TestCase extends PHPUnit_Framework_TestCase
     {
         $items = $collection->toArray();
         $v = array_values($items);
-        $ks = $this->group($v,
+        $ks = $this->group(
+            $v,
             function ($value, $offset) {
                 return $value;
             },
@@ -71,7 +72,8 @@ class TestCase extends PHPUnit_Framework_TestCase
             }
         );
         $k = array_keys($items);
-        $vs = $this->group($v,
+        $vs = $this->group(
+            $v,
             function ($value, $offset) {
                 return $offset;
             },
