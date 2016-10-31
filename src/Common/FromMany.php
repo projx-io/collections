@@ -8,18 +8,6 @@ interface FromMany extends FromToMany
      * @param mixed $value
      * @return mixed[]
      */
-    public function offsetsOfValue($value);
-
-    /**
-     * @param mixed[] $values
-     * @return mixed[][]
-     */
-    public function offsetsOfValues($values);
-
-    /**
-     * @param mixed $value
-     * @return mixed[]
-     */
     public function keysOfValue($value);
 
     /**

@@ -2,20 +2,8 @@
 
 namespace ProjxIO\Collections\Common;
 
-interface FromOne extends ItemSet
+interface FromOne extends ItemSet, ValueSet
 {
-    /**
-     * @param mixed $value
-     * @return mixed
-     */
-    public function offsetOfValue($value);
-
-    /**
-     * @param mixed[] $values
-     * @return mixed[]
-     */
-    public function offsetOfValues($values);
-
     /**
      * @param mixed $value
      * @return mixed

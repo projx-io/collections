@@ -4,6 +4,7 @@ namespace ProjxIO\Collections;
 
 use Exception;
 use PHPUnit_Framework_TestCase;
+use ProjxIO\Collections\Common\ArrayCollection;
 use ProjxIO\Collections\Common\Entry;
 use ProjxIO\Collections\Common\ItemCollection;
 use ProjxIO\Collections\Common\SequentialEntry;
@@ -42,13 +43,42 @@ class TestCase extends PHPUnit_Framework_TestCase
      * @param $items
      * @return array
      */
-    public function generateCase(ItemCollection $collection)
+    public function generateItemsCase(ItemCollection $collection)
     {
         $items = $collection->items();
         $v = array_unique(array_map($this->value(), $items));
         $ks = $this->group($items, $this->value(), $this->key());
         $k = array_unique(array_map($this->key(), $items));
         $vs = $this->group($items, $this->key(), $this->value());
+
+        return [$collection, $v, $vs, $k, $ks, $items];
+    }
+
+    /**
+     * @param $collection
+     * @return array
+     */
+    public function generateArrayCase(ArrayCollection $collection)
+    {
+        $items = $collection->toArray();
+        $v = array_values($items);
+        $ks = $this->group($v,
+            function ($value, $offset) {
+                return $value;
+            },
+            function ($value, $offset) {
+                return $offset;
+            }
+        );
+        $k = array_keys($items);
+        $vs = $this->group($v,
+            function ($value, $offset) {
+                return $offset;
+            },
+            function ($value, $offset) {
+                return $value;
+            }
+        );
 
         return [$collection, $v, $vs, $k, $ks, $items];
     }
@@ -75,10 +105,10 @@ class TestCase extends PHPUnit_Framework_TestCase
 
     public function group($items, $callback, $callback2)
     {
-        $names = array_map($callback, $items);
+        $names = array_map($callback, $items, array_keys($items));
         $groups = array_fill_keys(array_unique($names), []);
         array_map(function ($item, $group, $offset) use (&$groups, $callback2) {
-            $groups[$group][$offset] = call_user_func($callback2, $item);
+            $groups[$group][$offset] = call_user_func($callback2, $item, $offset);
         }, $items, $names, array_keys($items));
         return $groups;
     }
@@ -152,11 +182,12 @@ class TestCase extends PHPUnit_Framework_TestCase
         $oto->addItems($this->itemsManyToMany());
 
         return [
-            $this->generateCase($oto),
-            $this->generateCase(new ArrayOneToOne($this->itemsOneToOne())),
-            $this->generateCase(new ArrayOneToMany($this->itemsOneToMany())),
-            $this->generateCase(new ArrayManyToOne($this->itemsManyToOne())),
-            $this->generateCase(new ArrayManyToMany($this->itemsManyToMany())),
+            $this->generateItemsCase($oto),
+            $this->generateArrayCase(new ArrayList(['a', 'b', 'c'])),
+            $this->generateItemsCase(new ArrayOneToOne($this->itemsOneToOne())),
+            $this->generateItemsCase(new ArrayOneToMany($this->itemsOneToMany())),
+            $this->generateItemsCase(new ArrayManyToOne($this->itemsManyToOne())),
+            $this->generateItemsCase(new ArrayManyToMany($this->itemsManyToMany())),
         ];
     }
 

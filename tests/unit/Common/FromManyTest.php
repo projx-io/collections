@@ -17,36 +17,6 @@ class FromManyTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testOffsetsOfValue(FromMany $collection, $v, $vs, $k, $ks)
-    {
-        $expect = array_keys($ks[$v[0]]);
-        $actual = $collection->offsetsOfValue($v[0]);
-        $this->assertEquals($expect, $actual);
-    }
-
-    /**
-     * @dataProvider collectionProviderTest
-     * @param FromMany $collection
-     * @param mixed[] $v
-     * @param mixed[][] $ks
-     * @param mixed[] $k
-     * @param mixed[][] $vs
-     */
-    public function testOffsetsOfValues(FromMany $collection, $v, $vs, $k, $ks)
-    {
-        $expect = [array_keys($ks[$v[0]]), array_keys($ks[$v[1]])];
-        $actual = $collection->offsetsOfValues([$v[0], $v[1]]);
-        $this->assertEquals($expect, $actual);
-    }
-
-    /**
-     * @dataProvider collectionProviderTest
-     * @param FromMany $collection
-     * @param mixed[] $v
-     * @param mixed[][] $ks
-     * @param mixed[] $k
-     * @param mixed[][] $vs
-     */
     public function testKeysOfValue(FromMany $collection, $v, $vs, $k, $ks)
     {
         $expect = array_values($ks[$v[0]]);

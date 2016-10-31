@@ -17,36 +17,6 @@ class FromOneTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testOffsetOfValue(FromOne $collection, $v, $vs, $k, $ks)
-    {
-        $expect = array_keys($ks[$v[0]])[0];
-        $actual = $collection->offsetOfValue($v[0]);
-        $this->assertEquals($expect, $actual);
-    }
-
-    /**
-     * @dataProvider collectionProviderTest
-     * @param FromOne $collection
-     * @param mixed[] $v
-     * @param mixed[][] $ks
-     * @param mixed[] $k
-     * @param mixed[][] $vs
-     */
-    public function testOffsetOfValues(FromOne $collection, $v, $vs, $k, $ks)
-    {
-        $expect = [array_keys($ks[$v[0]])[0], array_keys($ks[$v[1]])[0]];
-        $actual = $collection->offsetOfValues([$v[0], $v[1]]);
-        $this->assertEquals($expect, $actual);
-    }
-
-    /**
-     * @dataProvider collectionProviderTest
-     * @param FromOne $collection
-     * @param mixed[] $v
-     * @param mixed[][] $ks
-     * @param mixed[] $k
-     * @param mixed[][] $vs
-     */
     public function testKeyOfValue(FromOne $collection, $v, $vs, $k, $ks)
     {
         $expect = array_values($ks[$v[0]])[0];
