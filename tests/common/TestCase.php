@@ -5,7 +5,7 @@ namespace ProjxIO\Collections;
 use Exception;
 use PHPUnit_Framework_TestCase;
 use ProjxIO\Collections\Common\Entry;
-use ProjxIO\Collections\Common\FromToOneMany;
+use ProjxIO\Collections\Common\ItemCollection;
 use ProjxIO\Collections\Common\SequentialEntry;
 
 class TestCase extends PHPUnit_Framework_TestCase
@@ -42,7 +42,7 @@ class TestCase extends PHPUnit_Framework_TestCase
      * @param $items
      * @return array
      */
-    public function generateCase(FromToOneMany $collection)
+    public function generateCase(ItemCollection $collection)
     {
         $items = $collection->items();
         $v = array_unique(array_map($this->value(), $items));
