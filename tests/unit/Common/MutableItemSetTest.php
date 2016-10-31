@@ -15,7 +15,7 @@ class MutableItemSetTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testPutEntry(MutableItemSet $collection, $v, $ks, $k, $vs)
+    public function testPutEntry(MutableItemSet $collection, $v, $vs, $k, $ks)
     {
         $key = 'MM';
         $value = 'NN';
@@ -32,7 +32,7 @@ class MutableItemSetTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testPutItem(MutableItemSet $collection, $v, $ks, $k, $vs)
+    public function testPutItem(MutableItemSet $collection, $v, $vs, $k, $ks)
     {
         $key = 'MM';
         $value = 'NN';
@@ -50,7 +50,7 @@ class MutableItemSetTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testPutItems(MutableItemSet $collection, $v, $ks, $k, $vs)
+    public function testPutItems(MutableItemSet $collection, $v, $vs, $k, $ks)
     {
         $items = [
             new EntryItem('MM', 'NN'),
@@ -69,7 +69,7 @@ class MutableItemSetTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testRestrictions(MutableItemSet $collection, $v, $ks, $k, $vs)
+    public function testRestrictions(MutableItemSet $collection, $v, $vs, $k, $ks)
     {
         $a = new EntryItem('MM', 'NN');
         $b = new EntryItem('OO', 'PP');
@@ -89,7 +89,7 @@ class MutableItemSetTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testAddDuplicate(MutableItemSet $collection, $v, $ks, $k, $vs)
+    public function testAddDuplicate(MutableItemSet $collection, $v, $vs, $k, $ks)
     {
         $collection->putEntry('AA', 'ZZ');
         $expect = count($collection->items());

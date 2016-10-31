@@ -15,7 +15,7 @@ class MutableItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testRemoveOffset(MutableItemSet $collection, $v, $ks, $k, $vs)
+    public function testRemoveOffset(MutableItemSet $collection, $v, $vs, $k, $ks)
     {
         $this->assertTrue($collection->containsEntry($k[0], $v[0]));
         $collection->removeOffset(0);
@@ -30,7 +30,7 @@ class MutableItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testRemoveOffsets(MutableItemSet $collection, $v, $ks, $k, $vs)
+    public function testRemoveOffsets(MutableItemSet $collection, $v, $vs, $k, $ks)
     {
         $this->assertTrue($collection->containsEntry($k[0], $v[0]));
         $this->assertTrue($collection->containsEntry($k[2], $v[2]));
@@ -47,7 +47,7 @@ class MutableItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testRemoveEntry(MutableItemSet $collection, $v, $ks, $k, $vs)
+    public function testRemoveEntry(MutableItemSet $collection, $v, $vs, $k, $ks)
     {
         $this->assertTrue($collection->containsEntry($k[0], $v[0]));
         $collection->removeEntry($k[0], $v[0]);
@@ -62,7 +62,7 @@ class MutableItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testRemoveItem(MutableItemSet $collection, $v, $ks, $k, $vs)
+    public function testRemoveItem(MutableItemSet $collection, $v, $vs, $k, $ks)
     {
         $this->assertTrue($collection->containsEntry($k[0], $v[0]));
         $collection->removeItem(new EntryItem($k[0], $v[0]));
@@ -77,7 +77,7 @@ class MutableItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testRemoveItems(MutableItemSet $collection, $v, $ks, $k, $vs)
+    public function testRemoveItems(MutableItemSet $collection, $v, $vs, $k, $ks)
     {
         $this->assertTrue($collection->containsEntry($k[0], $v[0]));
         $this->assertTrue($collection->containsEntry($k[2], $v[2]));
@@ -97,7 +97,7 @@ class MutableItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testRemoveValue(MutableItemSet $collection, $v, $ks, $k, $vs)
+    public function testRemoveValue(MutableItemSet $collection, $v, $vs, $k, $ks)
     {
         $this->assertTrue($collection->containsValue($v[0]));
         $collection->removeValue($v[0]);
@@ -112,7 +112,7 @@ class MutableItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testRemoveValues(MutableItemSet $collection, $v, $ks, $k, $vs)
+    public function testRemoveValues(MutableItemSet $collection, $v, $vs, $k, $ks)
     {
         $this->assertTrue($collection->containsValue($v[0]));
         $this->assertTrue($collection->containsValue($v[2]));
@@ -129,7 +129,7 @@ class MutableItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testRemoveKey(MutableItemSet $collection, $v, $ks, $k, $vs)
+    public function testRemoveKey(MutableItemSet $collection, $v, $vs, $k, $ks)
     {
         $this->assertTrue($collection->containsKey($k[0]));
         $collection->removeKey($k[0]);
@@ -144,7 +144,7 @@ class MutableItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testRemoveKeys(MutableItemSet $collection, $v, $ks, $k, $vs)
+    public function testRemoveKeys(MutableItemSet $collection, $v, $vs, $k, $ks)
     {
         $this->assertTrue($collection->containsKey($k[0]));
         $this->assertTrue($collection->containsKey($k[2]));
@@ -161,7 +161,7 @@ class MutableItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testRemoveNonexistentEntry(MutableItemSet $collection, $v, $ks, $k, $vs)
+    public function testRemoveNonexistentEntry(MutableItemSet $collection, $v, $vs, $k, $ks)
     {
         $collection->removeEntry('AA', 'ZZ');
         $expect = count($collection->items());

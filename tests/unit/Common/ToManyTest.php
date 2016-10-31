@@ -14,7 +14,7 @@ class ToManyTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testOffsetsOfKey(ToMany $collection, $v, $ks, $k, $vs)
+    public function testOffsetsOfKey(ToMany $collection, $v, $vs, $k, $ks)
     {
         $expect = array_keys($vs[$k[0]]);
         $actual = $collection->offsetsOfKey($k[0]);
@@ -29,7 +29,7 @@ class ToManyTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testOffsetsOfKeys(ToMany $collection, $v, $ks, $k, $vs)
+    public function testOffsetsOfKeys(ToMany $collection, $v, $vs, $k, $ks)
     {
         $expect = [array_keys($vs[$k[0]]), array_keys($vs[$k[1]])];
         $actual = $collection->offsetsOfKeys([$k[0], $k[1]]);
@@ -44,7 +44,7 @@ class ToManyTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testValuesOfKey(ToMany $collection, $v, $ks, $k, $vs)
+    public function testValuesOfKey(ToMany $collection, $v, $vs, $k, $ks)
     {
         $expect = array_values($vs[$k[0]]);
         $actual = $collection->valuesOfKey($k[0]);
@@ -59,7 +59,7 @@ class ToManyTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testValuesOfKeys(ToMany $collection, $v, $ks, $k, $vs)
+    public function testValuesOfKeys(ToMany $collection, $v, $vs, $k, $ks)
     {
         $expect = [array_values($vs[$k[0]]), array_values($vs[$k[1]])];
         $actual = $collection->valuesOfKeys([$k[0], $k[1]]);
@@ -74,7 +74,7 @@ class ToManyTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testItemsOfKey(ToMany $collection, $v, $ks, $k, $vs)
+    public function testItemsOfKey(ToMany $collection, $v, $vs, $k, $ks)
     {
         $values = array_values($vs[$k[0]]);
         $keys = [$k[0], $k[0]];
@@ -90,7 +90,7 @@ class ToManyTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testItemsOfKeys(ToMany $collection, $v, $ks, $k, $vs)
+    public function testItemsOfKeys(ToMany $collection, $v, $vs, $k, $ks)
     {
         $values = [array_values($vs[$k[0]]), array_values($vs[$k[1]])];
         $keys = [[$k[0], $k[0]], [$k[1], $k[1]]];

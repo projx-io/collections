@@ -15,7 +15,7 @@ class ItemListTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testOffsetsOfEntry(ItemList $collection, $v, $ks, $k, $vs)
+    public function testOffsetsOfEntry(ItemList $collection, $v, $vs, $k, $ks)
     {
         $expect = array_intersect(array_keys($ks[$v[0]]), array_keys($vs[$k[0]]));
         $actual = $collection->offsetsOfEntry($k[0], $v[0]);
@@ -30,7 +30,7 @@ class ItemListTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testOffsetsOfItem(ItemList $collection, $v, $ks, $k, $vs)
+    public function testOffsetsOfItem(ItemList $collection, $v, $vs, $k, $ks)
     {
         $expect = array_intersect(array_keys($ks[$v[0]]), array_keys($vs[$k[0]]));
         $actual = $collection->offsetsOfItem(new EntryItem($k[0], $v[0]));
@@ -45,7 +45,7 @@ class ItemListTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testOffsetsOfItems(ItemList $collection, $v, $ks, $k, $vs)
+    public function testOffsetsOfItems(ItemList $collection, $v, $vs, $k, $ks)
     {
         $expect = [
             array_intersect(array_keys($ks[$v[0]]), array_keys($vs[$k[0]])),

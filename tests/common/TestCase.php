@@ -50,7 +50,7 @@ class TestCase extends PHPUnit_Framework_TestCase
         $k = array_unique(array_map($this->key(), $items));
         $vs = $this->group($items, $this->key(), $this->value());
 
-        return [$collection, $v, $ks, $k, $vs, $items];
+        return [$collection, $v, $vs, $k, $ks, $items];
     }
 
     /**

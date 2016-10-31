@@ -15,7 +15,7 @@ class ItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testContainsKey(ItemCollection $collection, $v, $ks, $k, $vs)
+    public function testContainsKey(ItemCollection $collection, $v, $vs, $k, $ks)
     {
         $actual = $collection->containsKey($k[0]);
         $this->assertTrue($actual);
@@ -29,7 +29,7 @@ class ItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testContainsKeyFalse(ItemCollection $collection, $v, $ks, $k, $vs)
+    public function testContainsKeyFalse(ItemCollection $collection, $v, $vs, $k, $ks)
     {
         $actual = $collection->containsKey('MM');
         $this->assertFalse($actual);
@@ -43,7 +43,7 @@ class ItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testContainsValue(ItemCollection $collection, $v, $ks, $k, $vs)
+    public function testContainsValue(ItemCollection $collection, $v, $vs, $k, $ks)
     {
         $actual = $collection->containsValue($v[0]);
         $this->assertTrue($actual);
@@ -57,7 +57,7 @@ class ItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testContainsValueFalse(ItemCollection $collection, $v, $ks, $k, $vs)
+    public function testContainsValueFalse(ItemCollection $collection, $v, $vs, $k, $ks)
     {
         $actual = $collection->containsValue('NN');
         $this->assertFalse($actual);
@@ -71,7 +71,7 @@ class ItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testContainsEntry(ItemCollection $collection, $v, $ks, $k, $vs)
+    public function testContainsEntry(ItemCollection $collection, $v, $vs, $k, $ks)
     {
         $actual = $collection->containsEntry($k[0], $v[0]);
         $this->assertTrue($actual);
@@ -85,7 +85,7 @@ class ItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testContainsEntryFalse(ItemCollection $collection, $v, $ks, $k, $vs)
+    public function testContainsEntryFalse(ItemCollection $collection, $v, $vs, $k, $ks)
     {
         $actual = $collection->containsEntry('MM', 'NN');
         $this->assertFalse($actual);
@@ -99,7 +99,7 @@ class ItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testContainsItem(ItemCollection $collection, $v, $ks, $k, $vs)
+    public function testContainsItem(ItemCollection $collection, $v, $vs, $k, $ks)
     {
         $item = new EntryItem($k[0], $v[0]);
         $actual = $collection->containsItem($item);
@@ -114,7 +114,7 @@ class ItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testContainsItemFalse(ItemCollection $collection, $v, $ks, $k, $vs)
+    public function testContainsItemFalse(ItemCollection $collection, $v, $vs, $k, $ks)
     {
         $item = new EntryItem('MM', 'NN');
         $actual = $collection->containsItem($item);
@@ -129,7 +129,7 @@ class ItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testContainsItems(ItemCollection $collection, $v, $ks, $k, $vs, $i)
+    public function testContainsItems(ItemCollection $collection, $v, $vs, $k, $ks, $i)
     {
         $items = [
             new EntryItem($k[0], $v[0]),
@@ -147,7 +147,7 @@ class ItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testContainsItemsFalse(ItemCollection $collection, $v, $ks, $k, $vs, $i)
+    public function testContainsItemsFalse(ItemCollection $collection, $v, $vs, $k, $ks, $i)
     {
         $items = [
             new EntryItem($k[0], $v[0]),
@@ -165,7 +165,7 @@ class ItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testKeys(ItemCollection $collection, $v, $ks, $k, $vs)
+    public function testKeys(ItemCollection $collection, $v, $vs, $k, $ks)
     {
         $expect = $k;
         $actual = $collection->keys();
@@ -180,7 +180,7 @@ class ItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testValues(ItemCollection $collection, $v, $ks, $k, $vs)
+    public function testValues(ItemCollection $collection, $v, $vs, $k, $ks)
     {
         $expect = $v;
         $actual = $collection->values();
@@ -196,7 +196,7 @@ class ItemCollectionTest extends TestCase
      * @param mixed[][] $vs
      * @param Entry[] $i
      */
-    public function testItems(ItemCollection $collection, $v, $ks, $k, $vs, $i)
+    public function testItems(ItemCollection $collection, $v, $vs, $k, $ks, $i)
     {
         $expect = $i;
         $actual = $collection->items();
@@ -211,7 +211,7 @@ class ItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testValueOfOffset(ItemCollection $collection, $v, $ks, $k, $vs)
+    public function testValueOfOffset(ItemCollection $collection, $v, $vs, $k, $ks)
     {
         $expect = $v[1];
         $actual = $collection->valueOfOffset(1);
@@ -226,7 +226,7 @@ class ItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testValueOfOffsets(ItemCollection $collection, $v, $ks, $k, $vs)
+    public function testValueOfOffsets(ItemCollection $collection, $v, $vs, $k, $ks)
     {
         $expect = [$v[1], $v[2]];
         $actual = $collection->valueOfOffsets([1, 2]);
@@ -241,7 +241,7 @@ class ItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testKeyOfOffset(ItemCollection $collection, $v, $ks, $k, $vs)
+    public function testKeyOfOffset(ItemCollection $collection, $v, $vs, $k, $ks)
     {
         $expect = $k[1];
         $actual = $collection->keyOfOffset(1);
@@ -256,7 +256,7 @@ class ItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testKeyOfOffsets(ItemCollection $collection, $v, $ks, $k, $vs)
+    public function testKeyOfOffsets(ItemCollection $collection, $v, $vs, $k, $ks)
     {
         $expect = [$k[1], $k[2]];
         $actual = $collection->keyOfOffsets([1, 2]);
@@ -271,7 +271,7 @@ class ItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testItemOfOffset(ItemCollection $collection, $v, $ks, $k, $vs)
+    public function testItemOfOffset(ItemCollection $collection, $v, $vs, $k, $ks)
     {
         $key = $k[1];
         $value = $v[1];
@@ -287,7 +287,7 @@ class ItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testItemOfOffsets(ItemCollection $collection, $v, $ks, $k, $vs)
+    public function testItemOfOffsets(ItemCollection $collection, $v, $vs, $k, $ks)
     {
         $keys = [$k[1], $k[2]];
         $values = [$v[1], $v[2]];
