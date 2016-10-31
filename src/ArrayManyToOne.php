@@ -476,19 +476,9 @@ class ArrayManyToOne implements ManyToOne, MutableItemSet
     /**
      * @inheritDoc
      */
-    public function withOffsets()
-    {
-        return array_map(function (Entry $item, $offset) {
-            return new SequentialEntryItem($item->key(), $item->value(), $offset);
-        }, $this->items, array_keys($this->items));
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function getIterator()
     {
-        return new ArrayIterator($this->items);
+        return new ItemIterator($this->items);
     }
 
     /**

@@ -67,9 +67,4 @@ interface ItemCollection extends ValueCollection
      * @return Entry[]
      */
     public function itemOfOffsets($offsets);
-
-    /**
-     * @return ItemCollection
-     */
-    public function withOffsets();
 }

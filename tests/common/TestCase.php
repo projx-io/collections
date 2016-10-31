@@ -46,9 +46,9 @@ class TestCase extends PHPUnit_Framework_TestCase
     public function generateItemsCase(ItemCollection $collection)
     {
         $items = $collection->items();
-        $v = array_unique(array_map($this->value(), $items));
+        $v = array_map($this->value(), $items);
         $ks = $this->group($items, $this->value(), $this->key());
-        $k = array_unique(array_map($this->key(), $items));
+        $k = array_map($this->key(), $items);
         $vs = $this->group($items, $this->key(), $this->value());
 
         return [$collection, $v, $vs, $k, $ks, $items];

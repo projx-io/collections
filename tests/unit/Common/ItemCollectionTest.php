@@ -139,7 +139,7 @@ class ItemCollectionTest extends TestCase
      */
     public function testKeys(ItemCollection $collection, $v, $vs, $k, $ks)
     {
-        $expect = $k;
+        $expect = array_unique($k);
         $actual = $collection->keys();
         $this->assertEquals($expect, $actual);
     }
@@ -154,7 +154,7 @@ class ItemCollectionTest extends TestCase
      */
     public function testValues(ItemCollection $collection, $v, $vs, $k, $ks)
     {
-        $expect = $v;
+        $expect = array_unique($v);
         $actual = $collection->values();
         $this->assertEquals($expect, $actual);
     }
