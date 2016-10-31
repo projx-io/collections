@@ -2,6 +2,7 @@
 
 namespace ProjxIO\Collections;
 
+use ArrayIterator;
 use ProjxIO\Collections\Common\Stream;
 
 class ValueStream implements Stream
@@ -25,7 +26,7 @@ class ValueStream implements Stream
      */
     public function getIterator()
     {
-
+        return new ArrayIterator($this->values);
     }
 
     /**
@@ -42,8 +43,7 @@ class ValueStream implements Stream
      */
     public function map(callable $callback)
     {
-        array_map($callback, $this->values);
-        return $this;
+        return new ValueStream(array_map($callback, $this->values));
     }
 
     /**
@@ -51,7 +51,7 @@ class ValueStream implements Stream
      */
     public function filter(callable $callback)
     {
-
+        return new ValueStream(array_filter($this->values, $callback));
     }
 
     /**
