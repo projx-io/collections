@@ -26,7 +26,7 @@ class ArrayList implements ValueList, ArrayCollection
      */
     public function containsValue($value)
     {
-        return array_search($value, $this->values, true);
+        return array_search($value, $this->values, true) !== false;
     }
 
     /**

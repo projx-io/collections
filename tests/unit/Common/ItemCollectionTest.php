@@ -43,34 +43,6 @@ class ItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
-    public function testContainsValue(ItemCollection $collection, $v, $vs, $k, $ks)
-    {
-        $actual = $collection->containsValue($v[0]);
-        $this->assertTrue($actual);
-    }
-
-    /**
-     * @dataProvider collectionProviderTest
-     * @param ItemCollection $collection
-     * @param mixed[] $v
-     * @param mixed[][] $ks
-     * @param mixed[] $k
-     * @param mixed[][] $vs
-     */
-    public function testContainsValueFalse(ItemCollection $collection, $v, $vs, $k, $ks)
-    {
-        $actual = $collection->containsValue('NN');
-        $this->assertFalse($actual);
-    }
-
-    /**
-     * @dataProvider collectionProviderTest
-     * @param ItemCollection $collection
-     * @param mixed[] $v
-     * @param mixed[][] $ks
-     * @param mixed[] $k
-     * @param mixed[][] $vs
-     */
     public function testContainsEntry(ItemCollection $collection, $v, $vs, $k, $ks)
     {
         $actual = $collection->containsEntry($k[0], $v[0]);
@@ -201,36 +173,6 @@ class ItemCollectionTest extends TestCase
         $expect = $i;
         $actual = $collection->items();
         $this->assertItems($expect, $actual);
-    }
-
-    /**
-     * @dataProvider collectionProviderTest
-     * @param ItemCollection $collection
-     * @param mixed[] $v
-     * @param mixed[][] $ks
-     * @param mixed[] $k
-     * @param mixed[][] $vs
-     */
-    public function testValueOfOffset(ItemCollection $collection, $v, $vs, $k, $ks)
-    {
-        $expect = $v[1];
-        $actual = $collection->valueOfOffset(1);
-        $this->assertEquals($expect, $actual);
-    }
-
-    /**
-     * @dataProvider collectionProviderTest
-     * @param ItemCollection $collection
-     * @param mixed[] $v
-     * @param mixed[][] $ks
-     * @param mixed[] $k
-     * @param mixed[][] $vs
-     */
-    public function testValueOfOffsets(ItemCollection $collection, $v, $vs, $k, $ks)
-    {
-        $expect = [$v[1], $v[2]];
-        $actual = $collection->valueOfOffsets([1, 2]);
-        $this->assertEquals($expect, $actual);
     }
 
     /**
