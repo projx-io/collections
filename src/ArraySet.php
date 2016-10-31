@@ -3,9 +3,9 @@
 namespace ProjxIO\Collections;
 
 use ProjxIO\Collections\Common\ArrayCollection;
-use ProjxIO\Collections\Common\MutableValueList;
+use ProjxIO\Collections\Common\MutableValueSet;
 
-class ArrayList implements MutableValueList, ArrayCollection
+class ArraySet implements MutableValueSet, ArrayCollection
 {
     /**
      * @var array
@@ -18,7 +18,7 @@ class ArrayList implements MutableValueList, ArrayCollection
      */
     public function __construct($values = [])
     {
-        $this->addValues($values);
+        $this->putValues($values);
     }
 
     /**
@@ -56,23 +56,17 @@ class ArrayList implements MutableValueList, ArrayCollection
     /**
      * @inheritDoc
      */
-    public function offsetsOfValue($value)
+    public function offsetOfValue($value)
     {
-        $offsets = [];
-        foreach ($this->values as $offset => &$item) {
-            if ($item === $value) {
-                $offsets[] = $offset;
-            }
-        }
-        return $offsets;
+        return array_search($value, $this->values, true);
     }
 
     /**
      * @inheritDoc
      */
-    public function offsetsOfValues($values)
+    public function offsetOfValues($values)
     {
-        return array_map([$this, 'offsetsOfValue'], $values);
+        return array_map([$this, 'offsetOfValue'], $values);
     }
 
     /**
@@ -98,7 +92,7 @@ class ArrayList implements MutableValueList, ArrayCollection
      */
     public function removeValue($value)
     {
-        $this->removeOffsets($this->offsetsOfValue($value));
+        $this->removeOffset($this->offsetOfValue($value));
     }
 
     /**
@@ -112,7 +106,7 @@ class ArrayList implements MutableValueList, ArrayCollection
     /**
      * @inheritDoc
      */
-    public function addValue($value)
+    public function putValue($value)
     {
         $this->values[] = $value;
     }
@@ -120,8 +114,8 @@ class ArrayList implements MutableValueList, ArrayCollection
     /**
      * @inheritDoc
      */
-    public function addValues($values)
+    public function putValues($values)
     {
-        array_map([$this, 'addValue'], $values);
+        array_map([$this, 'putValue'], $values);
     }
 }

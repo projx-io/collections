@@ -183,7 +183,8 @@ class TestCase extends PHPUnit_Framework_TestCase
 
         return [
             $this->generateItemsCase($oto),
-            $this->generateArrayCase(new ArrayList(['a', 'b', 'c'])),
+            $this->generateArrayCase(new ArrayList(array_map($this->key(), $this->itemsOneToOne()))),
+            $this->generateArrayCase(new ArraySet(array_map($this->key(), $this->itemsOneToOne()))),
             $this->generateItemsCase(new ArrayOneToOne($this->itemsOneToOne())),
             $this->generateItemsCase(new ArrayOneToMany($this->itemsOneToMany())),
             $this->generateItemsCase(new ArrayManyToOne($this->itemsManyToOne())),
