@@ -29,6 +29,20 @@ class ItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
+    public function testContainsKeyFalse(ItemCollection $collection, $v, $ks, $k, $vs)
+    {
+        $actual = $collection->containsKey('MM');
+        $this->assertFalse($actual);
+    }
+
+    /**
+     * @dataProvider collectionProviderTest
+     * @param ItemCollection $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
+     */
     public function testContainsValue(ItemCollection $collection, $v, $ks, $k, $vs)
     {
         $actual = $collection->containsValue($v[0]);
@@ -43,10 +57,38 @@ class ItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
+    public function testContainsValueFalse(ItemCollection $collection, $v, $ks, $k, $vs)
+    {
+        $actual = $collection->containsValue('NN');
+        $this->assertFalse($actual);
+    }
+
+    /**
+     * @dataProvider collectionProviderTest
+     * @param ItemCollection $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
+     */
     public function testContainsEntry(ItemCollection $collection, $v, $ks, $k, $vs)
     {
         $actual = $collection->containsEntry($k[0], $v[0]);
         $this->assertTrue($actual);
+    }
+
+    /**
+     * @dataProvider collectionProviderTest
+     * @param ItemCollection $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
+     */
+    public function testContainsEntryFalse(ItemCollection $collection, $v, $ks, $k, $vs)
+    {
+        $actual = $collection->containsEntry('MM', 'NN');
+        $this->assertFalse($actual);
     }
 
     /**
@@ -72,6 +114,21 @@ class ItemCollectionTest extends TestCase
      * @param mixed[] $k
      * @param mixed[][] $vs
      */
+    public function testContainsItemFalse(ItemCollection $collection, $v, $ks, $k, $vs)
+    {
+        $item = new EntryItem('MM', 'NN');
+        $actual = $collection->containsItem($item);
+        $this->assertFalse($actual);
+    }
+
+    /**
+     * @dataProvider collectionProviderTest
+     * @param ItemCollection $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
+     */
     public function testContainsItems(ItemCollection $collection, $v, $ks, $k, $vs, $i)
     {
         $items = [
@@ -80,6 +137,24 @@ class ItemCollectionTest extends TestCase
         ];
         $actual = $collection->containsItems($items);
         $this->assertTrue($actual);
+    }
+
+    /**
+     * @dataProvider collectionProviderTest
+     * @param ItemCollection $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
+     */
+    public function testContainsItemsFalse(ItemCollection $collection, $v, $ks, $k, $vs, $i)
+    {
+        $items = [
+            new EntryItem($k[0], $v[0]),
+            new EntryItem('MM', 'NN'),
+        ];
+        $actual = $collection->containsItems($items);
+        $this->assertFalse($actual);
     }
 
     /**
