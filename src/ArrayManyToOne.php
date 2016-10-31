@@ -66,8 +66,6 @@ class ArrayManyToOne implements ManyToOne, MutableFromToOne
         if ($keyOffset === false) {
             $keyOffset = count($this->keys);
             $this->keys[$keyOffset] = $key;
-        } else {
-            $this->removeKey($key);
         }
 
         if ($valueOffset === false) {

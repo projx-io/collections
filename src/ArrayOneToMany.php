@@ -72,8 +72,6 @@ class ArrayOneToMany implements OneToMany, MutableFromToOne
         if ($valueOffset === false) {
             $valueOffset = count($this->values);
             $this->values[$valueOffset] = $value;
-        } else {
-            $this->removeValue($value);
         }
 
         $item = new EntryItem($key, $value);

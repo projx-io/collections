@@ -226,4 +226,36 @@ class MutableFromToOneTest extends TestCase
         $this->assertFalse($collection->containsKey($k[0]));
         $this->assertFalse($collection->containsKey($k[2]));
     }
+
+    /**
+     * @dataProvider collectionProviderTest
+     * @param MutableFromToOne $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
+     */
+    public function testRemoveNonexistentEntry(MutableFromToOne $collection, $v, $ks, $k, $vs)
+    {
+        $collection->removeEntry('AA', 'ZZ');
+        $expect = count($collection->items());
+        $collection->removeEntry('AA', 'ZZ');
+        $this->assertEquals($expect, count($collection->items()));
+    }
+
+    /**
+     * @dataProvider collectionProviderTest
+     * @param MutableFromToOne $collection
+     * @param mixed[] $v
+     * @param mixed[][] $ks
+     * @param mixed[] $k
+     * @param mixed[][] $vs
+     */
+    public function testAddDuplicate(MutableFromToOne $collection, $v, $ks, $k, $vs)
+    {
+        $collection->putEntry('AA', 'ZZ');
+        $expect = count($collection->items());
+        $collection->putEntry('AA', 'ZZ');
+        $this->assertEquals($expect, count($collection->items()));
+    }
 }
