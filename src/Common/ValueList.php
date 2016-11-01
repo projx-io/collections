@@ -6,13 +6,13 @@ interface ValueList extends ValueCollection
 {
     /**
      * @param mixed $value
-     * @return mixed[]
+     * @return int[]
      */
     public function offsetsOfValue($value);
 
     /**
      * @param mixed[] $values
-     * @return mixed[][]
+     * @return int[][]
      */
     public function offsetsOfValues($values);
 }
