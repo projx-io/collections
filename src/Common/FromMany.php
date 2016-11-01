@@ -2,7 +2,7 @@
 
 namespace ProjxIO\Collections\Common;
 
-interface FromMany extends FromToMany
+interface FromMany extends ItemCollection
 {
     /**
      * @param mixed $value
