@@ -50,10 +50,9 @@ class MutableValueCollectionTest extends TestCase
      */
     public function testRemoveOffset(MutableValueCollection $collection, $v, $vs, $k, $ks)
     {
-        $value = $v[0];
-        $this->assertTrue($collection->containsValue($value));
+        $expect = max(0, count($collection) - 1);
         $collection->removeOffset(0);
-        $this->assertFalse($collection->containsValue($value));
+        $this->assertCount($expect, $collection);
     }
 
     /**
@@ -66,10 +65,8 @@ class MutableValueCollectionTest extends TestCase
      */
     public function testRemoveOffsets(MutableValueCollection $collection, $v, $vs, $k, $ks)
     {
-        $this->assertTrue($collection->containsValue($v[0]));
-        $this->assertTrue($collection->containsValue($v[2]));
+        $expect = max(0, count($collection) - 2);
         $collection->removeOffsets([0, 2]);
-        $this->assertFalse($collection->containsValue($v[0]));
-        $this->assertFalse($collection->containsValue($v[2]));
+        $this->assertCount($expect, $collection);
     }
 }

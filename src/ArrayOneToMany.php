@@ -488,4 +488,12 @@ class ArrayOneToMany implements OneToMany, MutableItemSet
     {
         return new ValueStream($this->items);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function count()
+    {
+        return count($this->items);
+    }
 }

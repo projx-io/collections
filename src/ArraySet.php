@@ -135,4 +135,12 @@ class ArraySet implements MutableValueSet, ArrayCollection
     {
         return new ValueStream($this->values);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function count()
+    {
+        return count($this->values);
+    }
 }

@@ -141,4 +141,12 @@ class ArrayList implements MutableValueList, ArrayCollection
     {
         return new ValueStream($this->values);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function count()
+    {
+        return count($this->values);
+    }
 }

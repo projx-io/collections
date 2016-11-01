@@ -2,7 +2,9 @@
 
 namespace ProjxIO\Collections\Common;
 
-interface ValueCollection extends Streamable
+use Countable;
+
+interface ValueCollection extends Countable, Streamable
 {
     /**
      * @param mixed $value

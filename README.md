@@ -6,10 +6,26 @@
         mixed   valueOfOffset(int $offset)
         mixed[] valueOfOffsets(int[] $offsets)
         
+        MutableValueCollection
+            void removeOffset(int $offset)
+            void removeOffsets(int[] $offsets)
+            void removeValue(mixed $value)
+            void removeValues(mixed[] $values)
+            
         ValueSet
             int   offsetOfValue(mixed $value)
-            int[] offsetOfValues(mixed[] $value)
+            int[] offsetOfValues(mixed[] $values)
+        
+            MutableValueSet
+                void putValue(mixed $value)
+                void putValues(mixed[] $values)
         
         ValueList
             int[]   offsetsOfValue(mixed $value)
-            int[][] offsetsOfValues(mixed[] $value)
+            int[][] offsetsOfValues(mixed[] $values)
+
+            MutableValueSet
+                void addValue(mixed $value)
+                void addValues(mixed[] $values)
+
+    
